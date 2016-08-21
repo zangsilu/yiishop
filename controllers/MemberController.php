@@ -3,24 +3,23 @@
  * Created by PhpStorm.
  * User: MBENBEN
  * Date: 2016/8/21
- * Time: 1:39
+ * Time: 16:10
  */
 
 namespace app\controllers;
 
-use app\models\Users;
 use yii\web\Controller;
 
-class IndexController extends Controller{
+class MemberController extends Controller{
 
     //指定页面使用的布局文件
     public $layout = 'layout1';
 
-    /* 前台首页 */
-    public function actionIndex(){
+    /* 注册登入页 */
+    public function actionAuth(){
 
-
-        return $this->render('index',compact('data'));
+        $this->getView()->title='会员管理页';
+        return $this->render('auth');
 
     }
 
