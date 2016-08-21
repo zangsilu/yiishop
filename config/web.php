@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'defaultRoute' => 'index',//修改默认控制器为前台index控制器
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -60,6 +61,12 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+//        'allowedIPs' => ['192.168.2.101'],
+    ];
+
+    //开启新创建的后台(admin)模块
+    $config['modules']['admin'] = [
+        'class' => 'app\admin\admin',
     ];
 }
 
