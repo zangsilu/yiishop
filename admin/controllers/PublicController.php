@@ -7,6 +7,7 @@
  */
 namespace app\admin\controllers;
 
+use app\admin\models\Admin;
 use yii\web\Controller;
 
 class PublicController extends Controller{
@@ -17,7 +18,10 @@ class PublicController extends Controller{
     /* 后台管理员登入 */
     public function actionLogin(){
 
-    return $this->render('login');
+    //实例化模型,用于创建表单做字段映射;
+    $admin = new Admin();
+
+    return $this->render('login',compact('admin'));
 
     }
 
