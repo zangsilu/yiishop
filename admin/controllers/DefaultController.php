@@ -15,6 +15,9 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        if(!\Yii::$app->session->has('admin')){
+            $this->redirect(['public/login']);
+        }
 
         $this->layout = 'admin_layout';
         return $this->render('index');

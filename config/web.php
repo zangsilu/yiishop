@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'defaultRoute' => 'index',//修改默认控制器为前台index控制器
     'basePath' => dirname(__DIR__),
+    'timeZone'=>'Asia/Chongqing',//设置当前时区为北京时间
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
@@ -22,12 +23,22 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
+        /* 邮件发送设置 */
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false, //必须改为false
+            'transport' => [
+              'class' => 'Swift_SmtpTransport',
+              'host' => 'smtp.163.com',
+              'username' => 'zangsilu@163.com',
+              'password' => 'zsl13586722',
+              'port' => '465',//端口25对应tls协议 端口465对应ssl协议
+              'encryption' => 'ssl',
+          ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

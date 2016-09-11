@@ -4,7 +4,7 @@
 <?php use \yii\bootstrap\ActiveForm; ?>
 
 <head>
-    <title>慕课商城 - 后台管理</title>
+    <title>慕课商城 - 找回密码</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- bootstrap -->
     <link href="assets/admin/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -39,21 +39,16 @@
 
         <div class="span4 box">
             <div class="content-wrap">
-                <h6>慕课商城 - 后台管理</h6>
+                <h6>慕课商城 - 找回密码</h6>
+                <?php echo Yii::$app->session->hasFlash('info') ? Yii::$app->session->getFlash('info'):'' ?>
                 <div class="form-group field-admin-adminuser">
                     <p class="help-block help-block-error"></p>
                     <?php echo $form->field($admin,'admin_user')->textInput(['class'=>'span12','placeholder'=>'管理员账号'])  ?>
                 <div class="form-group field-admin-adminpass">
                     <p class="help-block help-block-error"></p>
-                    <?php echo $form->field($admin,'admin_pass')->passwordInput(['class'=>'span12','placeholder'=>'管理员密码'])  ?>
-                <a href="<?php echo \yii\helpers\Url::to(['public/seekpass'])?>" class="forgot">忘记密码?</a>
-                <div class="form-group field-remember-me">
-                    <?php echo $form->field($admin,'rememberMe')->checkbox([
-                        'id'=>'remember-me',
-                        'template'=>'<div class="remember">{input}<label for="remember-me">记住我</label></div>'
-                    ]); ?>
-                <button type="submit" class="btn-glow primary login">登录</button>
-                </div>
+                    <?php echo $form->field($admin,'admin_email')->textInput(['class'=>'span12','placeholder'=>'管理员邮箱'])  ?>
+                <a href="<?php echo \yii\helpers\Url::to(['public/login'])?>" class="forgot">返回登入</a>
+                <button type="submit" class="btn-glow primary login">找回密码</button></div>
         </div>
 
     <?php ActiveForm::end() ?>

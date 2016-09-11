@@ -147,7 +147,7 @@
                 </a>
             </li>
             <li class="settings hidden-phone">
-                <a href="/index.php?r=admin%2Fpublic%2Flogout" role="button">
+                <a href="<?php echo \yii\helpers\Url::to(['public/logout']) ?>" role="button">
                     <i class="icon-share-alt"></i>
                 </a>
             </li>
@@ -164,7 +164,7 @@
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
-            <a href="index.html">
+            <a href="<?php echo \yii\helpers\Url::to(['default/index']) ?>">
                 <i class="icon-home"></i>
                 <span>后台首页</span>
             </a>
@@ -176,8 +176,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="/index.php?r=admin%2Fmanage%2Fmanagers">管理员列表</a></li>
-                <li><a href="/index.php?r=admin%2Fmanage%2Freg">加入新管理员</a></li>
+                <li><a href="<?php echo \yii\helpers\Url::to(['manage/list']) ?>">管理员列表</a></li>
+                <li><a href="<?php echo \yii\helpers\Url::to(['manage/add']) ?>">加入新管理员</a></li>
             </ul>
         </li>
 
