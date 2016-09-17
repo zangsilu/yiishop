@@ -97,6 +97,43 @@ class ManageController extends Controller{
 
     }
 
+    /* 删除管理员 */
+    public function actionDel(){
+
+        $admin_id = (int)Yii::$app->request->get('admin_id');
+
+        if(!empty($admin_id)){
+            $re = Admin::deleteAll('id = :id',[':id'=>$admin_id]);
+            if($re){
+                Yii::$app->session->setFlash('info','删除成功!');
+                $this -> redirect(['manage/list']);
+            }else{
+                Yii::$app->session->setFlash('info','删除失败1!');
+                $this -> redirect(['manage/list']);
+            }
+        }
+        $this -> redirect(['manage/list']);
+    }
+
+    /* 修改管理员邮箱 */
+    public function actionChangeemail(){
+
+        $admin = Admin::find()->where('admin_user=:user',[':user'=>Yii::$app->session['admin']['admin_user']])->one();
+
+        if(Yii::$app->request->isPost){
+
+            $post = Yii::$app->request->post();
+            if($admin -> changeemail($post)){
+
+                Yii::$app->session->setFlash('info','邮箱修改成功!');
+            }
+        }
+
+        $admin->admin_pass = '';
+        return $this->render('changeemail',compact('admin'));
+    }
+
+    /*  */
 
 
 }
