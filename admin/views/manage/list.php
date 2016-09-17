@@ -38,7 +38,7 @@
                         <td><?= long2ip($v->admin_login_ip); ?></td>
                         <td><?= date('Y-m-d H:i:s',$v->admin_create_time); ?></td>
                         <td class="align-right">
-                            <a href="/index.php?r=admin%2Fmanage%2Fdel&adminid=11">删除</a></td>
+                            <a href="<?= \yii\helpers\Url::to(['manage/del','admin_id'=>$v->id]) ?>">删除</a></td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -47,6 +47,11 @@
             <div class="pagination pull-right">
                 <?php echo \yii\widgets\LinkPager::widget(['pagination'=>$pages]) ?>
             </div>
+            <?php
+             if(Yii::$app->session->hasFlash('info')){
+                 echo Yii::$app->session->getFlash('info');
+             }
+            ?>
             <!-- end users table --></div>
     </div>
 </div>

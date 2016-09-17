@@ -1,104 +1,73 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: MBENBEN
+ * Date: 2016/8/21
+ * Time: 13:07
+ */
 
+//用户模型类
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
-{
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+use yii\db\ActiveRecord;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+class User extends ActiveRecord{
 
+    public $repass;//确认密码;
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        //指定该模型映射的表名{{%}}写法表示自动调用/config/db.php里设置的表前缀;
+        return "{{%user}}";
     }
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
+    /* label字段名(显示于表单{label}) */
+    public function attributeLabels()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
+        return [
+            'username'=>'用户名',
+            'useremail'=>'电子邮箱',
+            'userpass'=>'用户密码',
+            'repass'=>'确认密码',
+        ];
+    }
+
+    /* 验证规则(显示于表单{error}) */
+    public function rules()
+    {
+        return [
+            ['username','required','message'=>'用户名不能为空!','on'=>['addUser']],
+            ['username','unique','message'=>'用户名已存在!','on'=>['addUser']],
+            ['userpass','required','message'=>'密码不能为空!','on'=>['addUser']],
+            ['repass','required','message'=>'确认密码不能为空!','on'=>['addUser']],
+//            ['rememberMe','boolean','on'=>'login'],
+//            ['userpass','validatePass','on'=>['addUser']],
+            ['useremail','required','message'=>'邮箱不能为空!','on'=>['addUser']],
+            ['useremail','email','message'=>'邮箱格式不正确!','on'=>['addUser']],
+            ['useremail','unique','message'=>'邮箱已存在!','on'=>['addUser']],
+//            ['admin_email','validateEmail','on'=>'seekpass'],
+            ['repass','compare','compareAttribute'=>'userpass','message'=>'2次密码不一致!','on'=>'addUser'],
+
+        ];
+    }
+
+    /* 添加会员 */
+    public function addUser($data){
+
+        $this->scenario = 'addUser';
+
+        if($this->load($data) && $this->validate()){
+
+            $this->createtime = time();
+            $this->userpass = md5($this->userpass);
+            
+            if($this->save(false)){
+                return true;
             }
+            return false;
         }
+        return false;
 
-        return null;
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
-    }
 }

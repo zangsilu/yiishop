@@ -36,15 +36,15 @@ class Admin extends ActiveRecord{
     public function rules()
     {
         return [
-            ['admin_user','required','message'=>'用户名不能为空!','on'=>['login','seekpass','changepass','add']],
+            ['admin_user','required','message'=>'用户名不能为空!','on'=>['login','seekpass','changepass','add','changeemail']],
             ['admin_user','unique','message'=>'用户名已存在!','on'=>['add']],
-            ['admin_pass','required','message'=>'密码不能为空!','on'=>['login','changepass','add']],
+            ['admin_pass','required','message'=>'密码不能为空!','on'=>['login','changepass','add','changeemail']],
             ['repass','required','message'=>'确认密码不能为空!','on'=>['changepass','add']],
             ['rememberMe','boolean','on'=>'login'],
-            ['admin_pass','validatePass','on'=>'login'],
-            ['admin_email','required','message'=>'邮箱不能为空!','on'=>['seekpass','add']],
-            ['admin_email','email','message'=>'邮箱格式不正确!','on'=>['seekpass','add']],
-            ['admin_email','unique','message'=>'邮箱已存在!','on'=>['add']],
+            ['admin_pass','validatePass','on'=>['login','changeemail']],
+            ['admin_email','required','message'=>'邮箱不能为空!','on'=>['seekpass','add','changeemail']],
+            ['admin_email','email','message'=>'邮箱格式不正确!','on'=>['seekpass','add','changeemail']],
+            ['admin_email','unique','message'=>'邮箱已存在!','on'=>['add','changeemail']],
             ['admin_email','validateEmail','on'=>'seekpass'],
             ['repass','compare','compareAttribute'=>'admin_pass','message'=>'2次密码不一致!','on'=>'changepass'],
 
@@ -160,13 +160,13 @@ class Admin extends ActiveRecord{
 
     }
 
-    /* 修改密码 */
+    /* 修改密码(重置密码) */
     public function changepass($data){
 
         $this->scenario = 'changepass';
 
         if($this->load($data) && $this->validate()){
-
+            
             return (bool)$this->updateAll(['admin_pass'=>md5($this->admin_pass)],'admin_user = :user',[':user'=>$this->admin_user]);
 
         }
@@ -174,5 +174,15 @@ class Admin extends ActiveRecord{
 
     }
 
+    /* 修改管理员邮箱 */
+    public function changeemail($data){
 
+        $this->scenario = 'changeemail';
+
+        if($this->load($data) && $this->validate()){
+
+            return (bool)$this->updateAll(['admin_email'=>$this->admin_email],'admin_user = :user',[':user'=>$this->admin_user]);
+        }
+        return false;
+    }
 }
