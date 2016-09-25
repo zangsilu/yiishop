@@ -13,7 +13,7 @@ use yii\data\Pagination;
 use yii\web\Controller;
 use Yii;
 
-class ManageController extends Controller{
+class ManageController extends BaseController{
 
     public $layout = 'admin_layout';
 

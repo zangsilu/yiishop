@@ -142,7 +142,7 @@ class Admin extends ActiveRecord{
                 'timestamp' =>time(),
                 'token' =>$this->createToken(time(),$this->admin_user)
             ])
-            ->setFrom('zangsilu@163.com')
+            ->setFrom(\Yii::$app->params['defaultValue']['admin_email'])
             ->setTo($this->admin_email)
             ->setSubject('木瓜商城-密码找回');
             if($mailer->send()){

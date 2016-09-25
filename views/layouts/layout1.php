@@ -55,8 +55,12 @@
 
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul class="right">
-                    <li><a href="authentication.html">注册</a></li>
-                    <li><a href="authentication.html">登录</a></li>
+                    <?php if(Yii::$app->session['isLogin']): ?>
+                        <li><a href="<?= \yii\helpers\Url::to(['member/logout']) ?>">退出</a></li>
+                    <?php else: ?>
+                    <li><a href="<?= \yii\helpers\Url::to(['member/auth']) ?>">注册</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to(['member/auth']) ?>">登录</a></li>
+                    <?php endif; ?>
                 </ul>
             </div><!-- /.col -->
         </div><!-- /.container -->

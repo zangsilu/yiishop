@@ -5,10 +5,15 @@
         <div class="container">
             <div class="row">
 
+
+
                 <div class="col-md-6">
                     <section class="section sign-in inner-right-xs">
                         <h2 class="bordered">登录</h2>
-                        <p>欢迎您回来，请您输入您的账户名密码</p>
+
+<span style="color: red;"><?php if(Yii::$app->session->hasFlash('info'))echo Yii::$app->session->getFlash('info'); ?></span>
+
+                        <p><strong><?php if(Yii::$app->session['username'])echo Yii::$app->session['username']; ?></strong>欢迎您回来，请您输入您的账户名密码</p>
 
                         <div class="social-auth-buttons">
                             <div class="row">
@@ -21,23 +26,24 @@
                             </div>
                         </div>
 
-                        <form role="form" class="login-form cf-style-1">
+                        <form role="form" method="post" class="login-form cf-style-1">
+                            <input type="hidden" name="_csrf" id="_csrf" value="<?= Yii::$app->request->csrfToken; ?>">
                             <div class="field-row">
                                 <label>电子邮箱</label>
-                                <input type="text" class="le-input">
+                                <input  type="text" name="User[useremail]" class="le-input">
                             </div><!-- /.field-row -->
 
                             <div class="field-row">
                                 <label>密码</label>
-                                <input type="text" class="le-input">
+                                <input type="password" name="User[userpass]" class="le-input">
                             </div><!-- /.field-row -->
 
                             <div class="field-row clearfix">
                         	<span class="pull-left">
-                        		<label class="content-color"><input type="checkbox" class="le-checbox auto-width inline"> <span class="bold">记住我</span></label>
+                        		<label class="content-color"><input type="checkbox" name="User[rememberMe]" class="le-checbox auto-width inline"> <span class="bold">记住我</span></label>
                         	</span>
                         	<span class="pull-right">
-                        		<a href="#" class="content-color bold">忘记密码 ?</a>
+                        		<a href="javascript:;" class="content-color bold">忘记密码 ?</a>
                         	</span>
                             </div>
 
@@ -49,15 +55,19 @@
                     </section><!-- /.sign-in -->
                 </div><!-- /.col -->
 
+
+
+
                 <div class="col-md-6">
                     <section class="section register inner-left-xs">
                         <h2 class="bordered">新建账户</h2>
                         <p>创建一个属于你自己的账户</p>
 
-                        <form role="form" class="register-form cf-style-1">
+                        <form role="form" method="post" action="<?php echo \yii\helpers\Url::to(['member/register']); ?>" class="register-form cf-style-1">
+                            <input type="hidden" name="_csrf" id="_csrf" value="<?php echo Yii::$app->request->csrfToken ?>">
                             <div class="field-row">
                                 <label>电子邮箱</label>
-                                <input type="text" class="le-input">
+                                <input name="User[useremail]" type="text" class="le-input">
                             </div><!-- /.field-row -->
 
                             <div class="buttons-holder">
