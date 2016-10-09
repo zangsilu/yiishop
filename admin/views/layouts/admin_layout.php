@@ -1,7 +1,6 @@
 
-<!DOCTYPE html>
-<html>
-<head>
+<?php $this->beginPage() ?>
+<?php $this->head() ?>
     <title>慕课商城 - 后台管理</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,8 +30,15 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-<body>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style type="text/css">
+    .help-block-error{color:red;}
+</style>
+
+
+    </head>
+<?php $this->beginBody() ?>
 
 <!-- navbar -->
 <div class="navbar navbar-inverse">
@@ -46,6 +52,9 @@
         <a class="brand" href="index.html" style="font-weight:700;font-family:Microsoft Yahei">慕课商城 - 后台管理</a>
 
         <ul class="nav pull-right">
+            <li style="color: red;font-size: 16px;line-height: 45px;margin-left:15px;">
+               <span>欢迎 <strong style="color: #fff;"><?= Yii::$app->session['admin']['admin_user'] ?></strong> 回来</span>
+            </li>
             <li class="hidden-phone">
                 <input class="search" type="text" />
             </li>
@@ -199,8 +208,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="/index.php?r=admin%2Fcategory%2Flist">分类列表</a></li>
-                <li><a href="/index.php?r=admin%2Fcategory%2Fadd">加入分类</a></li>
+                <li><a href="<?= \yii\helpers\Url::to(['category/list']) ?>">分类列表</a></li>
+                <li><a href="<?= \yii\helpers\Url::to(['category/add'])?>">加入分类</a></li>
             </ul>
         </li>
         <li>
@@ -210,8 +219,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="/index.php?r=admin%2Fproduct%2Flist">商品列表</a></li>
-                <li><a href="/index.php?r=admin%2Fproduct%2Fadd">添加商品</a></li>
+                <li><a href="<?= \yii\helpers\Url::to(['goods/list']) ?>">商品列表</a></li>
+                <li><a href="<?= \yii\helpers\Url::to(['goods/add']) ?>">添加商品</a></li>
             </ul>
         </li>
         <li>
@@ -246,6 +255,7 @@
 <script src="/assets/admin/js/theme.js"></script>
 <script src="/assets/admin/js/wysihtml5-0.3.0.js"></script>
 <script src="/assets/admin/js/bootstrap-wysihtml5-0.0.2.js"></script>
+
 
 <script type="text/javascript">
     $(function () {
@@ -368,9 +378,18 @@
         $("#product-pics").parent().append(pic);
     });
 
+
+    /*删除提醒*/
+    $('.del').click(function(){
+        if(!confirm('确定删除?')){
+            return false;
+        }
+    })
+
+
 </script>
 
-</body>
-</html>
+<?php $this->endBody(); ?>
+<?php $this->endPage(); ?>
 
 

@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 ?>
 
 
-<link rel="stylesheet" href="assets/admin/css/compiled/user-list.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/admin/css/compiled/user-list.css" type="text/css" media="screen" />
 <!-- main container -->
 <div class="content">
 
@@ -56,9 +56,9 @@ use yii\bootstrap\ActiveForm;
                         <tr class="first">
                             <td>
                                 <?php if (empty($user->profile->face_img)): ?>
-                                    <img src="<?php echo Yii::$app->params['defaultValue']['face_img']; ?>" class="img-circle avatar hidden-phone" />
+                                    <img src="<?php echo \yii\helpers\Url::home(true) ?><?php echo Yii::$app->params['defaultValue']['face_img']; ?>" class="img-circle avatar hidden-phone" />
                                 <?php else: ?>
-                                    <img src="assets/uploads/face_img/<?php echo $user->profile->avatar; ?>" class="img-circle avatar hidden-phone" />
+                                    <img src="<?php echo \yii\helpers\Url::home(true) ?>assets/uploads/face_img/<?php echo $user->profile->avatar; ?>" class="img-circle avatar hidden-phone" />
                                 <?php endif; ?>
                                 <a href="#" class="name"><?php echo $user->username; ?></a>
                                 <span class="subtext"><?php echo $user->useremail; ?></span>

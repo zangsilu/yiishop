@@ -8,7 +8,7 @@
                 <div class="row no-margin cart-item">
                     <div class="col-xs-12 col-sm-2 no-margin">
                         <a href="#" class="thumb-holder">
-                            <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg" />
+                            <img class="lazy" alt="" src="/assets/images/products/product-small-01.jpg" />
                         </a>
                     </div>
 
@@ -42,7 +42,7 @@
                 <div class="row no-margin cart-item">
                     <div class="col-xs-12 col-sm-2 no-margin">
                         <a href="#" class="thumb-holder">
-                            <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg" />
+                            <img class="lazy" alt="" src="/assets/images/products/product-small-01.jpg" />
                         </a>
                     </div>
 
@@ -76,7 +76,7 @@
                 <div class="row no-margin cart-item">
                     <div class="col-xs-12 col-sm-2 no-margin">
                         <a href="#" class="thumb-holder">
-                            <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg" />
+                            <img class="lazy" alt="" src="/assets/images/products/product-small-01.jpg" />
                         </a>
                     </div>
 
@@ -110,7 +110,7 @@
                 <div class="row no-margin cart-item">
                     <div class="col-xs-12 col-sm-2 no-margin">
                         <a href="#" class="thumb-holder">
-                            <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg" />
+                            <img class="lazy" alt="" src="/assets/images/products/product-small-01.jpg" />
                         </a>
                     </div>
 

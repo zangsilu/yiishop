@@ -11,6 +11,7 @@ use yii\web\Controller;
 
 class BaseController extends Controller{
 
+    /* 用于检测是否登入,只有登入后才能访问后台 */
     public function beforeAction($action)
     {
         if(!\Yii::$app->session->has('admin')){

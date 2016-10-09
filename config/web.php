@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'defaultRoute' => 'index',//修改默认控制器为前台index控制器
-    'basePath' => dirname(__DIR__),
+    'basePath' => dirname(__DIR__),//项目根目录
     'timeZone'=>'Asia/Chongqing',//设置当前时区为北京时间
     'bootstrap' => ['log'],
     'components' => [
@@ -52,15 +52,16 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+//            'suffix' => '.html',
             'rules' => [
+                // ...
             ],
         ],
-        */
     ],
+    'language' => 'zh-CN',
     'params' => $params,
 ];
 
