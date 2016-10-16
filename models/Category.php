@@ -42,7 +42,8 @@ class Category extends ActiveRecord{
     }
 
 
-    public function add($data){
+    public function add($data)
+    {
 
         $data['Category']['created_at'] = time();
         if($this->load($data) && $this->save()){
@@ -84,6 +85,18 @@ class Category extends ActiveRecord{
             $options[$v['id']] = $v['title'];
         }
         return $options;
+    }
+
+    /**
+     * 获取分类菜单
+     */
+    public static function getMenu()
+    {
+        $cate = self::find()->where(['pid'=>0])->asArray()->all();
+        foreach($cate as $k=>$v){
+            $cate[$k]['child'] = self::find()->where(['pid'=>$v['id']])->asArray()->all();
+        }
+        return $cate;
     }
 
 

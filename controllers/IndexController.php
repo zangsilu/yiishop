@@ -9,16 +9,14 @@
 namespace app\controllers;
 
 use app\models\Users;
-use yii\web\Controller;
 
-class IndexController extends Controller{
+class IndexController extends CommonController{
 
     //指定页面使用的布局文件
     public $layout = 'layout1';
 
     /* 前台首页 */
     public function actionIndex(){
-
 
         return $this->render('index',compact('data'));
 

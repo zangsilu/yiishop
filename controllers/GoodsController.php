@@ -7,9 +7,7 @@
  */
 namespace app\controllers;
 
-use yii\web\Controller;
-
-class GoodsController extends Controller{
+class GoodsController extends CommonController{
 
     //指定页面使用的布局文件
     public $layout = 'layout1';

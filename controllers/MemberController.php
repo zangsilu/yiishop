@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use Yii;
 
-class MemberController extends Controller{
+class MemberController extends CommonController{
 
     //指定页面使用的布局文件
     public $layout = 'layout1';
