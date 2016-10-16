@@ -9,7 +9,7 @@ namespace app\controllers;
 
 use yii\web\Controller;
 
-class OrderController extends Controller{
+class OrderController extends CommonController{
 
 
     /* 订单结算页 */

@@ -7,9 +7,11 @@
  */
 namespace app\controllers;
 
-use yii\web\Controller;
+use app\models\Category;
+use app\models\Goods;
+use Yii;
 
-class GoodsController extends Controller{
+class GoodsController extends CommonController{
 
     //指定页面使用的布局文件
     public $layout = 'layout1';
@@ -17,14 +19,28 @@ class GoodsController extends Controller{
     /* 商品列表页 */
     public function actionList(){
 
-        return $this->render('list');
+        $cid = Yii::$app->request->get('cid',0);
+
+        $category = new Category();
+        $cids = $category->getSubIds($cid);
+
+        //取出商品
+        $goodsInfo = Goods::find()->where(['ison'=>1,'cid'=>$cids])->orderBy(['created_at'=>'desc'])->all();
+
+        return $this->render('list',compact('goodsInfo'));
 
     }
 
     /* 商品详情页 */
     public function actionDetails(){
 
-        return $this->render('details');
+        $id = Yii::$app->request->get('goods_id');
+
+        $goodsInfo = Goods::findOne($id);
+        $goodsInfo->goods_pics = json_decode($goodsInfo->goods_pics,true);
+
+
+        return $this->render('details',compact('goodsInfo'));
 
     }
 

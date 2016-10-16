@@ -3,27 +3,25 @@
     <!-- ============================================================= HEADER : END ============================================================= -->		<div id="single-product">
         <div class="container">
 
+
             <div class="no-margin col-xs-12 col-sm-6 col-md-5 gallery-holder">
                 <div class="product-item-holder size-big single-product-gallery small-gallery">
 
                     <div id="owl-single-product">
                         <div class="single-product-gallery-item" id="slide1">
-                            <a data-rel="prettyphoto" href="images/products/product-gallery-01.jpg">
-                                <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-gallery-01.jpg" />
+                            <a data-rel="prettyphoto" href="javascript:;">
+                                <img class="img-responsive" alt="" src="<?= 'http://'.$goodsInfo->goods_img ?>" data-echo="<?= 'http://'.$goodsInfo->goods_img ?>" />
                             </a>
                         </div><!-- /.single-product-gallery-item -->
 
-                        <div class="single-product-gallery-item" id="slide2">
-                            <a data-rel="prettyphoto" href="images/products/product-gallery-01.jpg">
-                                <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-gallery-01.jpg" />
+                        <?php $i=2; foreach ($goodsInfo->goods_pics as $k=>$v): ?>
+                        <div class="single-product-gallery-item" id="slide<?= $i; $i=$i+1; ?>">
+                            <a data-rel="prettyphoto" href="javascript:;">
+                                <img class="img-responsive" alt="" src="<?= 'http://'.$v ?>" data-echo="<?= 'http://'.$v ?>" />
                             </a>
                         </div><!-- /.single-product-gallery-item -->
+                        <?php endforeach; ?>
 
-                        <div class="single-product-gallery-item" id="slide3">
-                            <a data-rel="prettyphoto" href="images/products/product-gallery-01.jpg">
-                                <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-gallery-01.jpg" />
-                            </a>
-                        </div><!-- /.single-product-gallery-item -->
                     </div><!-- /.single-product-slider -->
 
 
@@ -31,40 +29,17 @@
 
                         <div id="owl-single-product-thumbnails">
                             <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="0" href="#slide1">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
+                                <img width="67" height="60" alt="" src="<?= 'http://'.$goodsInfo->goods_img ?>" data-echo="<?= 'http://'.$goodsInfo->goods_img ?>" />
                             </a>
 
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="1" href="#slide2">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
 
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide3">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
+                            <?php $i=2; foreach ($goodsInfo->goods_pics as $k=>$v):  ?>
+                                <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="<?= $i-1 ?>" href="#slide<?= $i;$i+$i+1; ?>">
+                                    <img width="67" height="60" alt="" src="<?= 'http://'.$v ?>" data-echo="<?= 'http://'.$v ?>" />
+                                </a>
+                                <?php $i++; endforeach; ?>
 
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="0" href="#slide1">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
 
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="1" href="#slide2">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
-
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide3">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
-
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="0" href="#slide1">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
-
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="1" href="#slide2">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
-
-                            <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide3">
-                                <img width="67" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/gallery-thumb-01.jpg" />
-                            </a>
                         </div><!-- /#owl-single-product-thumbnails -->
 
                         <div class="nav-holder left hidden-xs">
@@ -81,36 +56,39 @@
             </div><!-- /.gallery-holder -->
             <div class="no-margin col-xs-12 col-sm-7 body-holder">
                 <div class="body">
-                    <div class="star-holder inline"><div class="star" data-score="4"></div></div>
                     <div class="availability"><label>存货:</label><span class="available">  现货</span></div>
 
-                    <div class="title"><a href="#">VAIO fit laptop - windows 8 SVF14322CXW</a></div>
-                    <div class="brand">sony</div>
+                    <div class="title"><a href="javascript:;"><?= $goodsInfo->goods_name ?></a></div>
 
                     <div class="excerpt">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare turpis non risus semper dapibus. Quisque eu vehicula turpis. Donec sodales lacinia eros, sit amet auctor tellus volutpat non.</p>
                     </div>
 
                     <div class="prices">
-                        <div class="price-current">$1740.00</div>
-                        <div class="price-prev">$2199.00</div>
+                        <div class="price-current">￥<?= $goodsInfo->goods_price ?></div>
                     </div>
 
-                    <div class="qnt-holder">
+
+
+                    <form id="form1" action="<?= \yii\helpers\Url::to(['cart/add']) ?>" method="post">
+                        <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                        <input type="hidden" name="gid" value="<?= $goodsInfo->id ?>">
+
+
+
+                        <div class="qnt-holder">
                         <div class="le-quantity">
-                            <form>
                                 <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1" />
+                                <input name="goods_num" readonly="readonly" type="text" value="1" />
                                 <a class="plus" href="#add"></a>
-                            </form>
                         </div>
-                        <a id="addto-cart" href="cart.html" class="le-button huge">加入购物车</a>
+                        <a id="addto-cart" onclick="$('#form1').submit();"  href="javascript:;" class="le-button huge">加入购物车</a>
                     </div><!-- /.qnt-holder -->
                 </div><!-- /.body -->
 
             </div><!-- /.body-holder -->
         </div><!-- /.container -->
     </div><!-- /.single-product -->
+    </form>
 
     <!-- ========================================= SINGLE PRODUCT TAB ========================================= -->
     <section id="single-product-tab">
@@ -124,35 +102,10 @@
                 </ul><!-- /.nav-tabs -->
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="description">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet porttitor eros. Praesent quis diam placerat, accumsan velit interdum, accumsan orci. Nunc libero sem, elementum in semper in, sollicitudin vitae dolor. Etiam sed tempus nisl. Integer vel diam nulla. Suspendisse et aliquam est. Nulla molestie ante et tortor sollicitudin, at elementum odio lobortis. Pellentesque neque enim, feugiat in elit sed, pharetra tempus metus. Pellentesque non lorem nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                    <div class="tab-pane active" style="text-align: center" id="description">
 
-                        <p>Sed consequat orci vel rutrum blandit. Nam non leo vel risus cursus porta quis non nulla. Vestibulum vitae pellentesque nunc. In hac habitasse platea dictumst. Cras egestas, turpis a malesuada mollis, magna tortor scelerisque urna, in pellentesque diam tellus sit amet velit. Donec vel rhoncus nisi, eget placerat elit. Phasellus dignissim nisl vel lectus vehicula, eget vehicula nisl egestas. Duis pretium sed risus dapibus egestas. Nam lectus felis, sodales sit amet turpis se.</p>
+                        <?= $goodsInfo->goods_desc ?>
 
-                        <div class="meta-row">
-                            <div class="inline">
-                                <label>SKU:</label>
-                                <span>54687621</span>
-                            </div><!-- /.inline -->
-
-                            <span class="seperator">/</span>
-
-                            <div class="inline">
-                                <label>categories:</label>
-                                <span><a href="#">-50% sale</a>,</span>
-                                <span><a href="#">gaming</a>,</span>
-                                <span><a href="#">desktop PC</a></span>
-                            </div><!-- /.inline -->
-
-                            <span class="seperator">/</span>
-
-                            <div class="inline">
-                                <label>tag:</label>
-                                <span><a href="#">fast</a>,</span>
-                                <span><a href="#">gaming</a>,</span>
-                                <span><a href="#">strong</a></span>
-                            </div><!-- /.inline -->
-                        </div><!-- /.meta-row -->
                     </div><!-- /.tab-pane #description -->
 
                     <div class="tab-pane" id="additional-info">

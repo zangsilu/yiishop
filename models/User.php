@@ -121,6 +121,7 @@ class User extends ActiveRecord{
         $this->scenario = 'userLogin';
 
         if($this->load($data) && $this->validate()){
+
             $lifttime = $this->rememberMe ? 24*3600*7:0;//记住密码为7天
             session_set_cookie_params($lifttime);
             \Yii::$app->session['username']=$this->useremail;

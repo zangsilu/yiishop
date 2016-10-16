@@ -9,6 +9,7 @@ namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 class Category extends ActiveRecord{
 
@@ -42,7 +43,8 @@ class Category extends ActiveRecord{
     }
 
 
-    public function add($data){
+    public function add($data)
+    {
 
         $data['Category']['created_at'] = time();
         if($this->load($data) && $this->save()){
@@ -73,6 +75,32 @@ class Category extends ActiveRecord{
         return $tree;
     }
 
+    /* 获取分类树(精简版) */
+    protected function getTree2(&$list,$pid=0){
+        static $tree = array();
+        foreach($list as $v){
+            if($v['pid'] == $pid){
+                $tree[] = $v['id'];
+                $this->getTree2($list,$v['id']);
+            }
+        }
+        return $tree;
+    }
+
+
+    /**获取所有子分类及其自身
+     * @param $id
+     * @return array
+     */
+    public function getSubIds($id)
+    {
+        $info = $this->find()->all();
+        $list = $this->getTree2($info,$id);
+        $list =  ArrayHelper::toArray($list);
+        return $list;
+    }
+
+
     /* 获取分类下拉列表显示数据 */
     public function getOption()
     {
@@ -84,6 +112,18 @@ class Category extends ActiveRecord{
             $options[$v['id']] = $v['title'];
         }
         return $options;
+    }
+
+    /**
+     * 获取分类菜单
+     */
+    public static function getMenu()
+    {
+        $cate = self::find()->where(['pid'=>0])->asArray()->all();
+        foreach($cate as $k=>$v){
+            $cate[$k]['child'] = self::find()->where(['pid'=>$v['id']])->asArray()->all();
+        }
+        return $cate;
     }
 
 

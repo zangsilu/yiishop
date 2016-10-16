@@ -42,25 +42,51 @@
 
 <div class="wrapper">
     <!-- ============================================================= TOP NAVIGATION ============================================================= -->
-    <nav class="top-bar animate-dropdown">
+    <nav id="top-megamenu-nav" class="megamenu-vertical animate-dropdown">
         <div class="container">
-            <div class="col-xs-12 col-sm-6 no-margin">
-                <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="category-grid.html">所有分类</a></li>
-                    <li><a href="cart.html">我的购物车</a></li>
-                    <li><a href="orders.html">我的订单</a></li>
-                </ul>
-            </div><!-- /.col -->
+            <div class="yamm navbar">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mc-horizontal-menu-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div><!-- /.navbar-header -->
+                <div class="collapse navbar-collapse" id="mc-horizontal-menu-collapse">
+                    <ul class="nav navbar-nav">
 
-            <div class="col-xs-12 col-sm-6 no-margin">
-                <ul class="right">
-                    <li><a href="<?php echo \yii\helpers\Url::home(true) ?>authentication.html">注册</a></li>
-                    <li><a href="<?php echo \yii\helpers\Url::home(true) ?>authentication.html">登录</a></li>
-                </ul>
-            </div><!-- /.col -->
+                        <li class="dropdown">
+                            <a href="<?php echo \yii\helpers\Url::to(['index/index']) ?>" class="dropdown-toggle" data-hover="dropdown">首页</a>
+                        </li>
+
+
+
+                        <?php  foreach ($this->params['menu'] as $k =>$v): ?>
+                            <li class="dropdown">
+                                <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$v['id']]) ?>" class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="yamm-content">
+                                            <div class="row">
+                                                <div >
+                                                    <?php foreach ($v['child'] as $m=>$n): ?>
+                                                        <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$n['id']]) ?>">
+                                                            <h2 style="padding-right: 10px;text-align: center"><?= $n['title'] ?></h2>
+                                                        </a>
+                                                    <?php endforeach; ?>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.yamm-content --></li>
+                                </ul>
+                            </li>
+                        <?php endforeach; ?>
+
+                    </ul><!-- /.navbar-nav -->
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.navbar -->
         </div><!-- /.container -->
-    </nav><!-- /.top-bar -->
+    </nav><!-- /.megamenu-vertical -->
     <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->		<!-- ============================================================= HEADER ============================================================= -->
     <header>
         <div class="container no-padding">
