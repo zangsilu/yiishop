@@ -9,7 +9,10 @@
 namespace app\controllers;
 
 use app\models\Category;
+<<<<<<< HEAD
 use app\models\Goods;
+=======
+>>>>>>> 3ac67aa422fc0955aa9315d3cd6633a5043a32a2
 use yii\web\Controller;
 
 class CommonController extends Controller
@@ -18,6 +21,7 @@ class CommonController extends Controller
     public function init()
     {
         $menu = Category::getMenu();
+<<<<<<< HEAD
 
         //存放在view对象的params里这样在每个view层里都可以通过$this->params[]获取到
         $this->view->params['menu'] = $menu;
@@ -28,5 +32,8 @@ class CommonController extends Controller
         $this->view->params['hot'] = Goods::find()->where(['ison'=>1,'is_hot'=>1])->orderBy('created_at desc')->limit(4)->all();
 
 
+=======
+        $this->view->params['menu'] = $menu;
+>>>>>>> 3ac67aa422fc0955aa9315d3cd6633a5043a32a2
     }
 }
