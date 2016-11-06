@@ -69,8 +69,8 @@
                             </li>
                         </ul>
                         <div class="buttons-holder">
-                            <a class="le-button big" href="checkout.html" >去结算</a>
-                            <a class="simple-link block" href="index.html" >继续购物</a>
+                            <a class="le-button big" href="<?= \yii\helpers\Url::to(['order/add']) ?>" >去结算</a>
+                            <a class="simple-link block" href="<?= \yii\helpers\Url::to(['/']) ?>" >继续购物</a>
                         </div>
                     </div>
                 </div><!-- /.widget -->

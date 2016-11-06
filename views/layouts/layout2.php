@@ -37,6 +37,26 @@
     <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/respond.min.js"></script>
     <![endif]-->
 
+    <!-- JavaScripts placed at the end of the document so the pages load faster -->
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-1.10.2.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-migrate-1.2.1.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/gmap3.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-hover-dropdown.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/owl.carousel.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/css_browser_selector.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/echo.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.easing-1.3.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-slider.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.raty.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.prettyPhoto.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.customSelect.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/wow.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/scripts.js"></script>
+
+
+
+
 </head>
 <body>
 
@@ -559,22 +579,6 @@
     </footer><!-- /#footer -->
     <!-- ============================================================= FOOTER : END ============================================================= -->	</div><!-- /.wrapper -->
 
-<!-- JavaScripts placed at the end of the document so the pages load faster -->
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-1.10.2.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-migrate-1.2.1.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/gmap3.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-hover-dropdown.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/owl.carousel.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/css_browser_selector.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/echo.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.easing-1.3.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-slider.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.raty.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.prettyPhoto.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.customSelect.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/wow.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/scripts.js"></script>
 
 <script>
     $("#createlink").click(function(){
