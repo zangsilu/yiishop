@@ -7,13 +7,10 @@
  */
 namespace app\controllers;
 
-<<<<<<< HEAD
 use app\models\Category;
 use app\models\Goods;
 use Yii;
 
-=======
->>>>>>> 3ac67aa422fc0955aa9315d3cd6633a5043a32a2
 class GoodsController extends CommonController{
 
     //指定页面使用的布局文件

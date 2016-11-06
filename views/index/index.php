@@ -9,7 +9,6 @@
                     <nav class="yamm megamenu-horizontal" role="navigation">
                         <ul class="nav">
 
-<<<<<<< HEAD
 
                             <?php  foreach ($this->params['menu'] as $k =>$v): ?>
                             <li class="dropdown menu-item">
@@ -34,32 +33,6 @@
 
 
 
-=======
-
-                            <?php  foreach ($this->params['menu'] as $k =>$v): ?>
-                            <li class="dropdown menu-item">
-                                <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$v['id']]) ?>" class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
-                                <ul class="dropdown-menu mega-menu">
-                                    <li class="yamm-content">
-                                        <!-- ================================== MEGAMENU VERTICAL ================================== -->
-                                        <div class="row">
-                                            <div class="col-xs-12 col-lg-4">
-                                                <ul>
-                                                    <?php foreach ($v['child'] as $m=>$n): ?>
-                                                        <li><a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$n['id']]) ?>"><?= $n['title'] ?></a></li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- ================================== MEGAMENU VERTICAL ================================== -->
-                                    </li>
-                                </ul>
-                            </li><!-- /.menu-item -->
-                            <?php endforeach; ?>
-
-
-
->>>>>>> 3ac67aa422fc0955aa9315d3cd6633a5043a32a2
                             <!--<li><a href="http://themeforest.net/item/media-center-electronic-ecommerce-html-template/8178892?ref=shaikrilwan">Buy this Theme</a></li>-->
                         </ul><!-- /.nav -->
                     </nav><!-- /.megamenu-horizontal -->
