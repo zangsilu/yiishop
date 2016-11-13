@@ -2,7 +2,7 @@
 
     <!-- ============================================================= HEADER : END ============================================================= -->		<!-- ========================================= CONTENT ========================================= -->
 
-    <section id="checkout-page">
+    <section id="checkout-page" xmlns="http://www.w3.org/1999/html">
         <div class="container">
             <div class="col-xs-12 no-margin">
                 <section id="shipping-address" style="margin-bottom:100px;margin-top:-10px">
@@ -15,24 +15,27 @@
                         }
                         ?>
                     </span>
-                    <form>
+                    <form id="payForm" action="<?= \yii\helpers\Url::to(['order/pay']) ?>" method="post">
+                        <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>">
+                        <input checked type="hidden" name="payType1" value="">
+                        <input checked type="hidden" name="orderId" value="<?= Yii::$app->request->get('order_id') ?>">
                         <?php foreach ($addressInfo as $k=>$v): ?>
                         <div class="row field-row" style="margin-top:10px">
                             <div class="col-xs-12">
-                                <input  class="le-radio big" value="<?= $v->id ?>" type="radio" name="address" />
+                                <input <?php if($k==0)echo 'checked'; ?>  class="le-radio big" value="<?= $v->id ?>" type="radio" name="address" />
+                                <span class="bold simple"><?= $v['shou_name'] ?></span>
                                 <a class="simple-link bold" href="JavaScript:;"><?= $v->address ?></a>
                             </div>
                         </div><!-- /.field-row -->
                             <a href="javascript:;" style="color: red;" data-value="<?= $v->id ?>" class="delAddress111">删除</a>
-
                         <?php endforeach;?>
 
-                    </form>
+
                 </section><!-- /#shipping-address -->
 
                 <div class="billing-address" style="display:none;">
                     <h2 class="border h1">新建联系人</h2>
-                    <form action="<?= \yii\helpers\Url::to(['address/add']) ?>" method="post">
+                    <form id="addressForm" action="<?= \yii\helpers\Url::to(['address/add']) ?>" method="post">
                         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
                         <div class="row field-row">
                             <div class="col-xs-12 col-sm-6">
@@ -74,7 +77,6 @@
 
                 <section id="your-order">
                     <h2 class="border h1">您的订单详情</h2>
-                    <form>
 
                         <?php foreach($orderGoodsInfo as $k=>$v): ?>
                         <div class="row no-margin order-item">
@@ -95,7 +97,6 @@
                         </div><!-- /.order-item -->
                         <?php endforeach;?>
 
-                    </form>
                 </section><!-- /#your-order -->
 
                 <div id="total-area" class="row no-margin">
@@ -128,29 +129,27 @@
                         </div><!-- /#subtotal-holder -->
                     </div><!-- /.col -->
                 </div><!-- /#total-area -->
-
                 <div id="payment-method-options">
-                    <form>
                         <div class="payment-method-option">
-                            <input class="le-radio" type="radio" name="group2" value="Direct">
-                            <div class="radio-label bold ">微信支付</div>
-                        </div><!-- /.payment-method-option -->
-
-                        <div class="payment-method-option">
-                            <input class="le-radio" type="radio" name="group2" value="cheque">
+                            <input checked class="le-radio" type="radio" name="payType" value="1">
                             <div class="radio-label bold ">支付宝支付</div>
                         </div><!-- /.payment-method-option -->
 
                         <div class="payment-method-option">
-                            <input class="le-radio" type="radio" name="group2" value="paypal">
+                            <input disabled class="le-radio" type="radio" name="payType" value="2">
+                            <div class="radio-label bold ">微信支付</div>
+                        </div><!-- /.payment-method-option -->
+
+                        <div class="payment-method-option">
+                            <input disabled class="le-radio" type="radio" name="payType" value="3">
                             <div class="radio-label bold ">网银支付</div>
                         </div><!-- /.payment-method-option -->
-                    </form>
                 </div><!-- /#payment-method-options -->
 
                 <div class="place-order-button">
-                    <button class="le-button big">确认订单</button>
+                    <button id="pay" type="submit" class="le-button big">确认订单</button>
                 </div><!-- /.place-order-button -->
+                </form>
 
             </div><!-- /.col -->
         </div><!-- /.container -->
@@ -172,4 +171,22 @@
             $(this).remove();
         }
     })
+
+    $('#pay').click(function(){
+        var address =  $('input[name=address]:checked').val();
+        if(typeof address == 'undefined'){
+            alert('请选择收货地址!');return false;
+        }
+        var payType =  $('input[name=payType]:checked').val();
+        if(typeof payType == 'undefined'){
+            alert('请选择支付方式!');return false;
+        }
+
+        $('#payForm input[name=payType1]').val(payType);
+        $('#payForm').submit();
+    })
+
+
+
+
 </script>

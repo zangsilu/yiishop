@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property string $express_no
  * @property string $amount
  * @property integer $status
+ * @property string $payType
  * @property string $created_at
  * @property string $updated_at
  */
@@ -63,7 +64,8 @@ class Order extends ActiveRecord
             [['user_id', 'address_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['amount'], 'number'],
             [['express_no'], 'string', 'max' => 60],
-            [['express'], 'string', 'max' => 24],
+            [['express','payType'], 'string', 'max' => 24],
+            [['trade_no','trade_text'], 'safe'],
         ];
     }
 
