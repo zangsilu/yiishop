@@ -37,7 +37,7 @@ $config = [
               'class' => 'Swift_SmtpTransport',
               'host' => 'smtp.163.com',
               'username' => 'zangsilu@163.com',
-              'password' => 'zsl13586722',
+              'password' => '',
               'port' => '465',//端口25对应tls协议 端口465对应ssl协议
               'encryption' => 'ssl',
           ],
