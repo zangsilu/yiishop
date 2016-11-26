@@ -60,6 +60,7 @@ class OrderController extends CommonController{
             ->select('og.*,g.goods_img,g.goods_name')
             ->alias('og')
             ->leftJoin(Goods::tableName().' g','og.goods_id = g.id')
+            ->where(['og.order_id'=>$order_id])
             ->asArray()
             ->all();
 
@@ -123,8 +124,9 @@ class OrderController extends CommonController{
             }
 
             $order_id = $orderModel->primaryKey;
-            $orderGoodsModel = new OrderGoods();
             foreach($cartInfo as $k=>$v){
+                //TODO:必须在循环里面创建新对象,这样才会一直是insert,如果在循环外面创建的话,第二次就会变成update了,因为第二次的已经不是新对象了,它把第一次插入的数据又带出来了,赋给该对象自己了;
+                $orderGoodsModel = new OrderGoods();
                 $orderGoodsModel->order_id = $order_id;
                 $orderGoodsModel->goods_num = $v['goods_num'];
                 $orderGoodsModel->goods_price = $v['goods_price'];

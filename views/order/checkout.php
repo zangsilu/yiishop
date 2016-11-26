@@ -15,14 +15,12 @@
                         }
                         ?>
                     </span>
-                    <form id="payForm" action="<?= \yii\helpers\Url::to(['order/pay']) ?>" method="post">
-                        <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>">
-                        <input checked type="hidden" name="payType1" value="">
-                        <input checked type="hidden" name="orderId" value="<?= Yii::$app->request->get('order_id') ?>">
+
+
                         <?php foreach ($addressInfo as $k=>$v): ?>
                         <div class="row field-row" style="margin-top:10px">
                             <div class="col-xs-12">
-                                <input <?php if($k==0)echo 'checked'; ?>  class="le-radio big" value="<?= $v->id ?>" type="radio" name="address" />
+                                <input  <?php if($k==0)echo 'checked'; ?>  class="le-radio big" value="<?= $v->id ?>" type="radio" name="address" />
                                 <span class="bold simple"><?= $v['shou_name'] ?></span>
                                 <a class="simple-link bold" href="JavaScript:;"><?= $v->address ?></a>
                             </div>
@@ -69,10 +67,16 @@
                         </div><!-- /.field-row -->
 
                         <div class="place-order-button">
-                            <button type="submit" class="le-button small">新建</button>
+                            <button id="addAddress" class="le-button small">新建</button>
                         </div><!-- /.place-order-button -->
                     </form>
                 </div><!-- /.billing-address -->
+
+                <form id="payForm" action="<?= \yii\helpers\Url::to(['order/pay']) ?>" method="post">
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>">
+                <input checked type="hidden" name="payType1" value="">
+                <input checked type="hidden" name="orderId" value="<?= Yii::$app->request->get('order_id') ?>">
+                    <input type="hidden" name="address" id="address" value="">
 
 
                 <section id="your-order">
@@ -156,6 +160,16 @@
     </section><!-- /#checkout-page -->
     <!-- ========================================= CONTENT : END ========================================= -->		<!-- ============================================================= FOOTER ============================================================= -->
 <script type="text/javascript">
+
+    $(function(){
+        $('#address').val($('input[name=address]:checked').val());
+        $('input[name=address]').click(function(){
+            $('#address').val($(this).val())
+        })
+
+    })
+
+
     $('input[name=express]').click(function(){
         var express = $(this).val();
         var order_id = <?= $_GET['order_id'] ?>;
@@ -170,6 +184,10 @@
             $(this).prev().remove();
             $(this).remove();
         }
+    })
+
+    $('#addAddress').click(function(){
+        $('#addressForm').submit();
     })
 
     $('#pay').click(function(){
