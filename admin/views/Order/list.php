@@ -66,6 +66,9 @@
                             <td>
                                 <span class="label label-success"><?= $v['status'] ?></span></td>
                             <td class="align-right">
+                                <?php if($v['status'] == '已付款'): ?>
+                                <a class="label label-warning" href="<?= \yii\helpers\Url::to(['order/send?order_id=' . $v['id']]) ?>">发货</a>
+                                <?php endif;?>
                                 <a href="<?= \yii\helpers\Url::to(['order/details?order_id=' . $v['id']]) ?>">查看</a>
                             </td>
                         </tr>
