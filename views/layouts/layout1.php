@@ -52,10 +52,10 @@
         <div class="container">
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="category-grid.html">所有分类</a></li>
-                    <li><a href="cart.html">我的购物车</a></li>
-                    <li><a href="orders.html">我的订单</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to(['index/index']) ?>">首页</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to(['goods/list']) ?>">所有分类</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to(['cart/index']) ?>">我的购物车</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to(['order/index']) ?>">我的订单</a></li>
                 </ul>
             </div><!-- /.col -->
 
@@ -79,8 +79,8 @@
             <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
-                    <a href="index.html">
-                        <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG" width="233" height="54"/>
+                    <a href="/">
+                        <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG"/>
                     </a>
                 </div><!-- /.logo -->
                 <!-- ============================================================= LOGO : END ============================================================= -->		</div><!-- /.logo-holder -->
@@ -495,7 +495,7 @@
 
                         <p>
                             西城区二环到三环德胜门外大街10号TCL大厦3层(马甸桥南), 北京市西城区, 中国
-                            <br>慕课网 (QQ群:416465236)
+                            <br>木瓜网 (QQ群:416465236)
                         </p>
 
                         <!--<div class="social-icons">

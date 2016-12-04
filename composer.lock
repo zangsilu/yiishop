@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b8f148e81f8b532c6701c52708945e53",
-    "content-hash": "57c551202c2f0112f28a21447f07d128",
+    "hash": "3291a00de08efd0c2a6b04c43917981f",
+    "content-hash": "8045372f5aba8236099c152a51039a6e",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -295,6 +295,48 @@
                 "yii"
             ],
             "time": "2016-08-31 00:36:28"
+        },
+        {
+            "name": "dzer/yii2-express",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dzer/yii2-express.git",
+                "reference": "b869dc7a5efb454604c0a39279180bb4ee194b51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/dzer/yii2-express/b869dc7a5efb454604c0a39279180bb4ee194b51.zip",
+                "reference": "b869dc7a5efb454604c0a39279180bb4ee194b51",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dzer\\express\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dzer",
+                    "email": "d20053140@gmail.com",
+                    "homepage": "http://dzer.me"
+                }
+            ],
+            "description": "快递单号查询,支持国内近100家快递单号查询。",
+            "keywords": [
+                "extension",
+                "yii2",
+                "快递"
+            ],
+            "time": "2016-06-17 03:09:37"
         },
         {
             "name": "ezyang/htmlpurifier",

@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%order}}".
@@ -42,7 +43,6 @@ class Order extends ActiveRecord
     const PAYNO = 0;
     const PAYSUCCESS = 1;
     const SENDED = 2;
-    const SHOUYES = 3;
     const TUIYES = 4;
     const DONE = 5;
 
@@ -50,7 +50,6 @@ class Order extends ActiveRecord
         self::PAYNO => '未付款',
         self::PAYSUCCESS  => '已付款',
         self::SENDED   => '已发货',
-        self::SHOUYES  => '已确认收货',
         self::TUIYES      => '已退货退款',
         self::DONE    => '订单完成',
     ];

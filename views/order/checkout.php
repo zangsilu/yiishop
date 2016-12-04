@@ -191,9 +191,14 @@
     })
 
     $('#pay').click(function(){
+
         var address =  $('input[name=address]:checked').val();
         if(typeof address == 'undefined'){
             alert('请选择收货地址!');return false;
+        }
+        var express =  $('input[name=express]:checked').val();
+        if(typeof express == 'undefined'){
+            alert('请选择快递方式!');return false;
         }
         var payType =  $('input[name=payType]:checked').val();
         if(typeof payType == 'undefined'){

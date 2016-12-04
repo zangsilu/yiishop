@@ -55,8 +55,6 @@
     <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/scripts.js"></script>
 
 
-
-
 </head>
 <body>
 
@@ -66,7 +64,8 @@
         <div class="container">
             <div class="yamm navbar">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mc-horizontal-menu-collapse">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#mc-horizontal-menu-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -77,21 +76,22 @@
                     <ul class="nav navbar-nav">
 
                         <li class="dropdown">
-                            <a href="<?php echo \yii\helpers\Url::to(['index/index']) ?>" class="dropdown-toggle" data-hover="dropdown">首页</a>
+                            <a href="<?php echo \yii\helpers\Url::to(['index/index']) ?>" class="dropdown-toggle"
+                               data-hover="dropdown">首页</a>
                         </li>
 
 
-
-                        <?php  foreach ($this->params['menu'] as $k =>$v): ?>
+                        <?php foreach ($this->params['menu'] as $k => $v): ?>
                             <li class="dropdown">
-                                <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$v['id']]) ?>" class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
+                                <a href="<?= \yii\helpers\Url::to(['goods/list?cid=' . $v['id']]) ?>"
+                                   class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="yamm-content">
                                             <div class="row">
-                                                <div >
-                                                    <?php foreach ($v['child'] as $m=>$n): ?>
-                                                        <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$n['id']]) ?>">
+                                                <div>
+                                                    <?php foreach ($v['child'] as $m => $n): ?>
+                                                        <a href="<?= \yii\helpers\Url::to(['goods/list?cid=' . $n['id']]) ?>">
                                                             <h2 style="padding-right: 10px;text-align: center"><?= $n['title'] ?></h2>
                                                         </a>
                                                     <?php endforeach; ?>
@@ -107,18 +107,21 @@
             </div><!-- /.navbar -->
         </div><!-- /.container -->
     </nav><!-- /.megamenu-vertical -->
-    <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->		<!-- ============================================================= HEADER ============================================================= -->
+    <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->
+    <!-- ============================================================= HEADER ============================================================= -->
     <header>
         <div class="container no-padding">
 
             <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
-                    <a href="index.html">
-                        <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG" width="233" height="54"/>
+                    <a href="/">
+                        <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG"
+                             />
                     </a>
                 </div><!-- /.logo -->
-                <!-- ============================================================= LOGO : END ============================================================= -->		</div><!-- /.logo-holder -->
+                <!-- ============================================================= LOGO : END ============================================================= -->
+            </div><!-- /.logo-holder -->
 
             <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder no-margin">
                 <div class="contact-row">
@@ -133,29 +136,34 @@
                 <div class="search-area">
                     <form>
                         <div class="control-group">
-                            <input class="search-field" placeholder="搜索商品" />
+                            <input class="search-field" placeholder="搜索商品"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
 
-                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="category-grid.html">所有分类</a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="<?= \yii\helpers\Url::to(['goods/list']) ?>">所有分类</a>
 
-                                    <ul class="dropdown-menu" role="menu" >
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
 
                                     </ul>
                                 </li>
                             </ul>
 
-                            <a style="padding:15px 15px 13px 12px" class="search-button" href="#" ></a>
+                            <a style="padding:15px 15px 13px 12px" class="search-button" href="#"></a>
 
                         </div>
                     </form>
                 </div><!-- /.search-area -->
-                <!-- ============================================================= SEARCH AREA : END ============================================================= -->		</div><!-- /.top-search-holder -->
+                <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+            </div><!-- /.top-search-holder -->
 
             <div class="col-xs-12 col-sm-12 col-md-3 top-cart-row no-margin">
                 <div class="top-cart-row-container">
@@ -168,7 +176,8 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <div class="basket-item-count">
                                     <span class="count">3</span>
-                                    <img src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/icon-cart.png" alt="" />
+                                    <img src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/icon-cart.png"
+                                         alt=""/>
                                 </div>
 
                                 <div class="total-price-basket">
@@ -185,7 +194,8 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                    <img alt=""
+                                                         src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -202,7 +212,8 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                    <img alt=""
+                                                         src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -219,7 +230,8 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                    <img alt=""
+                                                         src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -249,7 +261,8 @@
                         </div><!-- /.basket -->
                     </div><!-- /.top-cart-holder -->
                 </div><!-- /.top-cart-row-container -->
-                <!-- ============================================================= SHOPPING CART DROPDOWN : END ============================================================= -->		</div><!-- /.top-cart-row -->
+                <!-- ============================================================= SHOPPING CART DROPDOWN : END ============================================================= -->
+            </div><!-- /.top-cart-row -->
 
         </div><!-- /.container -->
 
@@ -257,7 +270,6 @@
 
 
     <?= $content ?>
-
 
 
     <footer id="footer" class="color-bg">
@@ -268,12 +280,14 @@
                     <!-- ============================================================= FEATURED PRODUCTS ============================================================= -->
                     <div class="widget">
                         <h2>推荐商品</h2>
+
                         <div class="body">
                             <ul>
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">Netbook Acer Travel B113-E-10072</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -282,7 +296,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -292,6 +308,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -299,7 +316,9 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-02.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-02.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -309,6 +328,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -317,7 +337,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-03.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-03.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -325,18 +347,21 @@
                             </ul>
                         </div><!-- /.body -->
                     </div> <!-- /.widget -->
-                    <!-- ============================================================= FEATURED PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+                    <!-- ============================================================= FEATURED PRODUCTS : END ============================================================= -->
+                </div><!-- /.col -->
 
                 <div class="col-xs-12 col-sm-4 ">
                     <!-- ============================================================= ON SALE PRODUCTS ============================================================= -->
                     <div class="widget">
                         <h2>促销商品</h2>
+
                         <div class="body">
                             <ul>
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">HP Scanner 2910P</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -345,7 +370,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-04.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-04.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -354,7 +381,9 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in - White</a>
+                                            <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in -
+                                                White</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -363,7 +392,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-05.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-05.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -373,6 +404,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -381,7 +413,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-06.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-06.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -389,18 +423,21 @@
                             </ul>
                         </div><!-- /.body -->
                     </div> <!-- /.widget -->
-                    <!-- ============================================================= ON SALE PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+                    <!-- ============================================================= ON SALE PRODUCTS : END ============================================================= -->
+                </div><!-- /.col -->
 
                 <div class="col-xs-12 col-sm-4 ">
                     <!-- ============================================================= TOP RATED PRODUCTS ============================================================= -->
                     <div class="widget">
                         <h2>最热商品</h2>
+
                         <div class="body">
                             <ul>
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">Galaxy Tab GT-P5210, 10" 16GB Wi-Fi</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -409,7 +446,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-07.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-07.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -419,6 +458,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
                                             <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -427,7 +467,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-08.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-08.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -436,7 +478,9 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Surface RT 64GB, Wi-Fi, 10.6in - Dark Titanium</a>
+                                            <a href="single-product.html">Surface RT 64GB, Wi-Fi, 10.6in - Dark
+                                                Titanium</a>
+
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -445,7 +489,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-09.jpg" />
+                                                <img alt=""
+                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-09.jpg"/>
                                             </a>
                                         </div>
 
@@ -454,7 +500,8 @@
                             </ul>
                         </div><!-- /.body -->
                     </div><!-- /.widget -->
-                    <!-- ============================================================= TOP RATED PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+                    <!-- ============================================================= TOP RATED PRODUCTS : END ============================================================= -->
+                </div><!-- /.col -->
 
             </div><!-- /.widgets-row-->
         </div><!-- /.container -->
@@ -476,14 +523,15 @@
                     <!-- ============================================================= CONTACT INFO ============================================================= -->
                     <div class="contact-info">
                         <div class="footer-logo">
-                            <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG" width="233" height="54"/>
+                            <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG"
+                                 width="233" height="54"/>
                         </div><!-- /.footer-logo -->
 
                         <p class="regular-bold"> 请通过电话，电子邮件随时联系我们</p>
 
                         <p>
                             西城区二环到三环德胜门外大街10号TCL大厦3层(马甸桥南), 北京市西城区, 中国
-                            <br>慕课网 (QQ群:416465236)
+                            <br>木瓜网 (QQ群:416465236)
                         </p>
 
                         <!--<div class="social-icons">
@@ -500,7 +548,8 @@
                         </div>--><!-- /.social-icons -->
 
                     </div>
-                    <!-- ============================================================= CONTACT INFO : END ============================================================= -->            </div>
+                    <!-- ============================================================= CONTACT INFO : END ============================================================= -->
+                </div>
 
                 <div class="col-xs-12 col-md-8 no-margin">
                     <!-- ============================================================= LINKS FOOTER ============================================================= -->
@@ -552,7 +601,8 @@
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->
-                    <!-- ============================================================= LINKS FOOTER : END ============================================================= -->            </div>
+                    <!-- ============================================================= LINKS FOOTER : END ============================================================= -->
+                </div>
             </div><!-- /.container -->
         </div><!-- /.link-list-row -->
 
@@ -566,10 +616,18 @@
                 <div class="col-xs-12 col-sm-6 no-margin">
                     <div class="payment-methods ">
                         <ul>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-visa.png"></li>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-master.png"></li>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-paypal.png"></li>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-skrill.png"></li>
+                            <li><img alt=""
+                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-visa.png">
+                            </li>
+                            <li><img alt=""
+                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-master.png">
+                            </li>
+                            <li><img alt=""
+                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-paypal.png">
+                            </li>
+                            <li><img alt=""
+                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-skrill.png">
+                            </li>
                         </ul>
                     </div><!-- /.payment-methods -->
                 </div>
@@ -577,11 +635,12 @@
         </div><!-- /.copyright-bar -->
 
     </footer><!-- /#footer -->
-    <!-- ============================================================= FOOTER : END ============================================================= -->	</div><!-- /.wrapper -->
+    <!-- ============================================================= FOOTER : END ============================================================= -->
+</div><!-- /.wrapper -->
 
 
 <script>
-    $("#createlink").click(function(){
+    $("#createlink").click(function () {
         $(".billing-address").slideDown();
     });
 

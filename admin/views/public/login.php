@@ -4,7 +4,7 @@
 <?php use \yii\bootstrap\ActiveForm; ?>
 
 <head>
-    <title>慕课商城 - 后台管理</title>
+    <title>木瓜商城 - 后台管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- bootstrap -->
     <link href="/assets/admin/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -39,7 +39,7 @@
 
         <div class="span4 box">
             <div class="content-wrap">
-                <h6>慕课商城 - 后台管理</h6>
+                <h6>木瓜商城 - 后台管理</h6>
                 <div class="form-group field-admin-adminuser">
                     <p class="help-block help-block-error"></p>
                     <?php echo $form->field($admin,'admin_user')->textInput(['class'=>'span12','placeholder'=>'管理员账号'])  ?>

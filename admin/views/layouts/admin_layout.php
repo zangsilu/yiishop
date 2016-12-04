@@ -1,7 +1,7 @@
 
 <?php $this->beginPage() ?>
 <?php $this->head() ?>
-    <title>慕课商城 - 后台管理</title>
+    <title>木瓜商城 - 后台管理</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -49,7 +49,7 @@
             <span class="icon-bar"></span>
         </button>
 
-        <a class="brand" href="index.html" style="font-weight:700;font-family:Microsoft Yahei">慕课商城 - 后台管理</a>
+        <a class="brand" href="index.html" style="font-weight:700;font-family:Microsoft Yahei">木瓜商城 - 后台管理</a>
 
         <ul class="nav pull-right">
             <li style="color: red;font-size: 16px;line-height: 45px;margin-left:15px;">
