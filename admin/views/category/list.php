@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yiidreamteam\jstree\JsTree;
 
 ?>
 
@@ -28,33 +29,28 @@ use yii\bootstrap\ActiveForm;
             </div>
             <!-- Users table -->
             <div class="row-fluid table">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th class="span3 sortable">
-                            <span class="line"></span>分类ID</th>
-                        <th class="span3 sortable">
-                            <span class="line"></span>分类名称</th>
-                        <th class="span3 sortable align-right">
-                            <span class="line"></span>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- row -->
-                    <?php foreach($list as $k=>$v): ?>
-                    <tr class="first">
-                        <td><?= $k ?></td>
-                        <td><?= $v ?></td>
-                        <td class="align-right">
-                            <?php if($k != 0): ?>
-                                <a href="<?= \yii\helpers\Url::to(['category/edit?id='.$k]) ?>">编辑</a>
-                                <a href="<?= \yii\helpers\Url::to(['category/del?id='.$k]) ?>">删除</a>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <?= JsTree::widget([
+                    'containerOptions' => [
+                        'class' => 'data-tree',
+                    ],
+                    'jsOptions' => [
+                        'core' => [
+                            'check_callback' => true,
+                            'multiple' => false,
+                            'data' => [
+                                // [{"id" : 1, "text" : "服装", "children" : [{}, {}]}, {}]
+                                'url' => \yii\helpers\Url::to(['category/tree']),
+                            ],
+                            'themes' => [
+                                "stripes" => true,
+                                "variant" => "large",
+                            ]
+                        ],
+                        "plugins" => [
+                            'contextmenu', 'dnd', 'search', 'state', 'types', 'wholerow'
+                        ],
+                    ]
+                ]) ?>
             </div>
             <div class="pagination pull-right"></div>
             <!-- end users table --></div>

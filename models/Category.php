@@ -8,6 +8,7 @@
 namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
+use yii\data\Pagination;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
@@ -126,6 +127,45 @@ class Category extends ActiveRecord{
         return $cate;
     }
 
+    /**
+     * 获取分类列表,用于js_tree插件
+     */
+    public static function getCategoryTreeList()
+    {
+        $data = self::find()->where(['pid'=>0]);
+        if(empty($data)){
+            return [];
+        }
+        $pager = new Pagination(['totalCount'=>$data->count(),'pageSize'=>10]);
+        $data = $data->orderBy('created_at desc')->offset($pager->offset)->limit($data->limit)->all();
+
+        $list = [];
+        foreach ($data as $k=>$v){
+            $list[] = [
+                'id'=>$v->id,
+                'text'=>$v->title,
+                'children'=>self::getChild($v->id),
+            ];
+        }
+        return ['data'=>$list,'pager'=>$pager];
+    }
+
+    public static function getChild($id)
+    {
+        $data = self::find()->where(['pid'=>$id])->all();
+
+        $children = [];
+        if(!empty($data)){
+            foreach ($data as $k=>$v){
+                $children[]=[
+                    'id' =>$v->id,
+                    'text'=>$v->title,
+                    'children' => self::getChild($v->id),
+                ];
+            }
+        }
+        return $children;
+    }
 
 
 

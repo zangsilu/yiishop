@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "838a82be14c0a0ee6fbed7f840bb967e",
-    "content-hash": "b48b194804d63bc5f4988db469057b95",
+    "hash": "9cae994094d47ded3754d34cff2f37d5",
+    "content-hash": "fc887f6cc0fef6fe516d4a8948fa5bb1",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -131,6 +131,52 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/jstree",
+            "version": "3.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vakata/jstree.git",
+                "reference": "9770c6711f0a155ec494f635aaf0add9b3cfb45c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vakata/jstree/zipball/9770c6711f0a155ec494f635aaf0add9b3cfb45c",
+                "reference": "9770c6711f0a155ec494f635aaf0add9b3cfb45c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.9.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./dist/jstree.js",
+                    "./dist/themes/default/style.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "docs",
+                    "demo",
+                    "libs",
+                    "node_modules",
+                    "test",
+                    "libs",
+                    "jstree.jquery.json",
+                    "gruntfile.js",
+                    "package.json",
+                    "bower.json",
+                    "component.json",
+                    "LICENCE-MIT",
+                    "README.md"
+                ]
+            },
+            "keywords": [
+                "jstree",
+                "tree",
+                "ui"
             ]
         },
         {
@@ -467,6 +513,51 @@
                 "mailer"
             ],
             "time": "2016-07-08 11:51:25"
+        },
+        {
+            "name": "yii-dream-team/yii2-jstree",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii-dream-team/yii2-jstree.git",
+                "reference": "42f46369fb504a2278b06ada6c120068a27f3460"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/yii-dream-team/yii2-jstree/42f46369fb504a2278b06ada6c120068a27f3460.zip",
+                "reference": "42f46369fb504a2278b06ada6c120068a27f3460",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jstree": "~3",
+                "yiisoft/yii2": "~2"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yiidreamteam\\jstree\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Samoylov",
+                    "email": "alexey.samoylov@gmail.com",
+                    "homepage": "http://yiiblog.ru",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 JsTree assets and widget",
+            "homepage": "http://yiidreamteam.com/yii2/jstree",
+            "keywords": [
+                "jstree",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-01-06 20:04:57"
         },
         {
             "name": "yiisoft/yii2",
