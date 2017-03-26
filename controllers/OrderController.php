@@ -5,6 +5,7 @@
  * Date: 2016/8/21
  * Time: 15:59
  */
+
 namespace app\controllers;
 
 use app\models\Address;
@@ -88,25 +89,27 @@ class OrderController extends CommonController
 
         $orderList = Order::find()->alias('o')
             ->select('o.*,a.shou_name')
-            ->leftJoin(Address::tableName().' a','o.address_id=a.id')
+            ->leftJoin(Address::tableName() . ' a', 'o.address_id=a.id')
+            ->leftJoin(User::tableName() . ' u', 'o.user_id = u.id')
+            ->where(['u.useremail' => Yii::$app->session->get('username')])
             ->orderBy('id desc')
             ->asArray()
             ->all();
-        foreach($orderList as $k=>$v){
-            $orderList[$k]['goodsInfo']=OrderGoods::find()->alias('og')
+        foreach ($orderList as $k => $v) {
+            $orderList[$k]['goodsInfo'] = OrderGoods::find()->alias('og')
                 ->select('og.*,g.goods_name,g.goods_img')
-                ->leftJoin(Goods::tableName().' g','og.goods_id=g.id')
-                ->where('og.order_id='.$v['id'])
+                ->leftJoin(Goods::tableName() . ' g', 'og.goods_id=g.id')
+                ->where('og.order_id=' . $v['id'])
                 ->asArray()
                 ->all();
             $orderList[$k]['status'] = Order::$status[$v['status']];
-            foreach(Yii::$app->params['express'] as $m=>$n){
-                if(in_array($v['express'],$n)){
+            foreach (Yii::$app->params['express'] as $m => $n) {
+                if (in_array($v['express'], $n)) {
                     $orderList[$k]['express_price'] = $n[1];
                 }
             }
         }
-        return $this->render('index',compact('orderList'));
+        return $this->render('index', compact('orderList'));
     }
 
     /**
@@ -234,9 +237,9 @@ class OrderController extends CommonController
             }
 
 
-        } catch (\Exception  $e ) {
-           /* var_dump($e);
-            die;*/
+        } catch (\Exception  $e) {
+             /*var_dump($e);
+             die;*/
             $this->redirect(['index/index']);
         }
     }
@@ -247,10 +250,12 @@ class OrderController extends CommonController
     public function actionGetExpress()
     {
         $order_id = Yii::$app->request->get('order_id');
-        if(!empty($order_id)){
-            $expressNo = Order::find()->where(['id'=>$order_id])->one()->express_no;
+        $result = [];
+        if (!empty($order_id)) {
+            $expressNo = Order::find()->where(['id' => $order_id])->one()->express_no;
+            $result = Express::search($expressNo);
         }
-        return Express::search($expressNo);
+        return $result;
     }
 
     /**
@@ -259,16 +264,16 @@ class OrderController extends CommonController
     public function actionConfirm()
     {
         $order_id = Yii::$app->request->post('order_id');
-        if(!empty($order_id)){
+        if (!empty($order_id)) {
             $orderInfo = Order::findOne($order_id);
         }
 
-        if(!empty($orderInfo) && $orderInfo->status==Order::SENDED){
+        if (!empty($orderInfo) && $orderInfo->status == Order::SENDED) {
             $orderInfo->status = Order::DONE;
         }
 
-        if($orderInfo->save()){
-          return $this->redirect(['order/index']);
+        if ($orderInfo->save()) {
+            return $this->redirect(['order/index']);
         }
     }
 

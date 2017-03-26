@@ -3,23 +3,25 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'basic',
+    'id'           => 'basic',
+    'language'     => 'zh-CN',
+    'charset'      => 'utf-8',
     'defaultRoute' => 'index',//修改默认控制器为前台index控制器
-    'basePath' => dirname(__DIR__),//项目根目录
-    'timeZone'=>'Asia/Chongqing',//设置当前时区为北京时间
-    'bootstrap' => ['log'],
-    'components' => [
-        'request' => [
+    'basePath'     => dirname(__DIR__),//项目根目录
+    'timeZone'     => 'Asia/Chongqing',//设置当前时区为北京时间
+    'bootstrap'    => ['log'],
+    'components'   => [
+        'request'      => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'pdNrTOsrTVlnSGcRBU-kQc75sSpRVjJq',
-                // Enable Yii Validate CSRF Token
-                'enableCsrfValidation' => true,
+            'cookieValidationKey'  => 'pdNrTOsrTVlnSGcRBU-kQc75sSpRVjJq',
+            // Enable Yii Validate CSRF Token
+            'enableCsrfValidation' => true,
         ],
-        'cache' => [
+        'cache'        => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
+        'user'         => [
+            'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -27,42 +29,41 @@ $config = [
         ],
 
         /* 邮件发送设置 */
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+        'mailer'       => [
+            'class'            => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => false, //必须改为false,true只是生成邮件在runtime文件夹下，不发邮件
-            'transport' => [
-              'class' => 'Swift_SmtpTransport',
-              'host' => 'smtp.163.com',
-              'username' => 'zangsilu@163.com',
-              'password' => 'zsl13586722',
-              'port' => '465',//端口25对应tls协议 端口465对应ssl协议
-              'encryption' => 'ssl',
-          ],
+            'transport'        => [
+                'class'      => 'Swift_SmtpTransport',
+                'host'       => 'smtp.163.com',
+                'username'   => 'zangsilu@163.com',
+                'password'   => 'zsl13586722',
+                'port'       => '465',//端口25对应tls协议 端口465对应ssl协议
+                'encryption' => 'ssl',
+            ],
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
-        'urlManager' => [
+        'db'           => require(__DIR__ . '/db.php'),
+        'urlManager'   => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'showScriptName'  => false,
 //            'suffix' => '.html',
-            'rules' => [
+            'rules'           => [
                 // ...
             ],
         ],
     ],
-    'language' => 'zh-CN',
-    'params' => $params,
+    'params'       => $params,
 ];
 
 if (YII_ENV_DEV) {

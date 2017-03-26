@@ -1,78 +1,86 @@
 <?php
 /* @var $this \yii\web\View */
+use app\assets\AppAsset;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\helpers\Html;
+
 /* @var $content string */
+
+AppAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="zh-cn">
-<?php $this->head() ?>
+<html lang="zh-cn" <?= Yii::$app->language; ?>>
+<head>
+    <?php $this->head() ?>
     <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="<?php echo \yii\helpers\Url::home(true) ?>author" content="">
-    <meta name="keywords" content="">
-    <meta name="robots" content="<?php echo \yii\helpers\Url::home(true) ?>all">
+    <meta charset="<?php echo Yii::$app->charset; ?>">
+    <?php
+    $this->registerMetaTag(['http-equiv' => 'Content-Type', 'content' => 'text/html; charset=UTF-8']);
+    $this->registerMetaTag(['name'    => 'viewport',
+                            'content' => 'width=device-width, initial-scale=1.0, user-scalable=no',
+    ]);
+    $this->registerMetaTag(['name' => 'description', 'content' => 'this is yii framework project']);
+    $this->registerMetaTag(['name' => 'author', 'content' => 'zangsilu']);
+    $this->registerMetaTag(['name' => 'keywords', 'content' => 'zangsilu, yii2, assets']);
+    $this->registerMetaTag(['name' => 'robots', 'content' => 'all']);
+    ?>
 
     <title>
-        <?= \yii\helpers\Html::encode($this->title) ?>
+        <?= \yii\helpers\Html::encode($this->title) . ' 木瓜商城' ?>
     </title>
-    
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/bootstrap.min.css">
 
-    <!-- Customizable CSS -->
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/main.css">
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/red.css">
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/animate.min.css">
-
-
-    <!-- Icons/Glyphs -->
-    <link rel="stylesheet" href="<?php echo \yii\helpers\Url::home(true) ?>assets/css/font-awesome.min.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?php echo \yii\helpers\Url::home(true) ?>assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/home/images/favicon.ico">
 
-    <!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
-    <!--[if lt IE 9]>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/html5shiv.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 <body>
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <!-- ============================================================= TOP NAVIGATION ============================================================= -->
-    <nav class="top-bar animate-dropdown">
-        <div class="container">
-            <div class="col-xs-12 col-sm-6 no-margin">
-                <ul>
-                    <li><a href="<?= \yii\helpers\Url::to(['index/index']) ?>">首页</a></li>
-                    <li><a href="<?= \yii\helpers\Url::to(['goods/list']) ?>">所有分类</a></li>
-                    <li><a href="<?= \yii\helpers\Url::to(['cart/index']) ?>">我的购物车</a></li>
-                    <li><a href="<?= \yii\helpers\Url::to(['order/index']) ?>">我的订单</a></li>
-                </ul>
-            </div><!-- /.col -->
+    <?php
+    NavBar::begin([
+        'options' => [
+            "class" => "top-bar animate-dropdown",
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-left'],
+        'items'   => [
+            ['label' => '首页', 'url' => ['/index/index']],
+            ['label' => '所有商品', 'url' => ['goods/list']],
+            Yii::$app->session['isLogin'] ? (
+            ['label' => '我的购物车', 'url' => ['/cart/index']]
+            ) : '',
+            Yii::$app->session['isLogin'] ? (
+            ['label' => '我的订单', 'url' => ['/order/index']]
+            ) : '',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items'   => [
+            !Yii::$app->session['isLogin'] ? (
+            ['label' => '注册', 'url' => ['/member/auth']]
+            ) : '',
+            !Yii::$app->session['isLogin'] ? (
+            ['label' => '登录', 'url' => ['/member/auth']]
+            ) : '',
+            Yii::$app->session['isLogin'] ? (
+                '欢迎您回来，' . Yii::$app->session["username"] . ' , ' .
+                Html::a('退出', ['/member/logout'])
+            ) : '',
+        ],
+    ]);
+    NavBar::end();
+    ?>
 
-            <div class="col-xs-12 col-sm-6 no-margin">
-                <ul class="right">
-                    <?php if(Yii::$app->session['isLogin']): ?>
-                        <li style="color:#4e91ff;font-weight: bold;"><?php echo Yii::$app->session['username'] ?></li>
-                        <li><a href="<?= \yii\helpers\Url::to(['member/logout']) ?>">退出</a></li>
-                    <?php else: ?>
-                    <li><a href="<?= \yii\helpers\Url::to(['member/auth']) ?>">注册</a></li>
-                    <li><a href="<?= \yii\helpers\Url::to(['member/auth']) ?>">登录</a></li>
-                    <?php endif; ?>
-                </ul>
-            </div><!-- /.col -->
-        </div><!-- /.container -->
-    </nav><!-- /.top-bar -->
-    <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->		<!-- ============================================================= HEADER ============================================================= -->
+    <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->
+    <!-- ============================================================= HEADER ============================================================= -->
     <header>
         <div class="container no-padding">
 
@@ -80,10 +88,11 @@
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
                     <a href="/">
-                        <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG"/>
+                        <img alt="logo" src="/home/images/logo.PNG"/>
                     </a>
                 </div><!-- /.logo -->
-                <!-- ============================================================= LOGO : END ============================================================= -->		</div><!-- /.logo-holder -->
+                <!-- ============================================================= LOGO : END ============================================================= -->
+            </div><!-- /.logo-holder -->
 
             <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder no-margin">
                 <div class="contact-row">
@@ -91,36 +100,41 @@
                         <i class="fa fa-phone"></i> (+086) 123 456 7890
                     </div>
                     <div class="contact inline">
-                        <i class="fa fa-envelope"></i> contact@<span class="le-color">jason.com</span>
+                        <i class="fa fa-envelope"></i> contact@<span class="le-color">zangsilu.com</span>
                     </div>
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
                 <div class="search-area">
                     <form>
                         <div class="control-group">
-                            <input class="search-field" placeholder="搜索商品" />
+                            <input class="search-field" placeholder="搜索商品"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
 
-                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="category-grid.html">所有分类</a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="category-grid.html">所有分类</a>
 
-                                    <ul class="dropdown-menu" role="menu" >
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                   href="category-grid.html">电子产品</a></li>
 
                                     </ul>
                                 </li>
                             </ul>
 
-                            <a style="padding:15px 15px 13px 12px" class="search-button" href="#" ></a>
+                            <a style="padding:15px 15px 13px 12px" class="search-button" href="#"></a>
 
                         </div>
                     </form>
                 </div><!-- /.search-area -->
-                <!-- ============================================================= SEARCH AREA : END ============================================================= -->		</div><!-- /.top-search-holder -->
+                <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+            </div><!-- /.top-search-holder -->
 
             <div class="col-xs-12 col-sm-12 col-md-3 top-cart-row no-margin">
                 <div class="top-cart-row-container">
@@ -133,12 +147,13 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <div class="basket-item-count">
                                     <span class="count">3</span>
-                                    <img src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/icon-cart.png" alt="" />
+                                    <img src="/home/images/icon-cart.png"
+                                         alt=""/>
                                 </div>
 
                                 <div class="total-price-basket">
                                     <span class="lbl">您的购物车:</span>
-                    <span class="total-price">
+                                    <span class="total-price">
                         <span class="sign">￥</span><span class="value">3219</span>
                     </span>
                                 </div>
@@ -150,7 +165,8 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                    <img alt=""
+                                                         src="/home/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -167,7 +183,8 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                    <img alt=""
+                                                         src="/home/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -184,7 +201,8 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                    <img alt=""
+                                                         src="/home/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -214,7 +232,8 @@
                         </div><!-- /.basket -->
                     </div><!-- /.top-cart-holder -->
                 </div><!-- /.top-cart-row-container -->
-                <!-- ============================================================= SHOPPING CART DROPDOWN : END ============================================================= -->		</div><!-- /.top-cart-row -->
+                <!-- ============================================================= SHOPPING CART DROPDOWN : END ============================================================= -->
+            </div><!-- /.top-cart-row -->
 
         </div><!-- /.container -->
 
@@ -223,7 +242,8 @@
             <div class="container">
                 <div class="yamm navbar">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mc-horizontal-menu-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#mc-horizontal-menu-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -234,29 +254,30 @@
                         <ul class="nav navbar-nav">
 
                             <li class="dropdown">
-                                <a href="<?php echo \yii\helpers\Url::to(['index/index']) ?>" class="dropdown-toggle" data-hover="dropdown">首页</a>
+                                <a href="<?php echo \yii\helpers\Url::to(['index/index']) ?>" class="dropdown-toggle"
+                                   data-hover="dropdown">首页</a>
                             </li>
 
 
-
-                            <?php  foreach ($this->params['menu'] as $k =>$v): ?>
-                            <li class="dropdown">
-                                <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$v['id']]) ?>" class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="yamm-content">
-                                            <div class="row">
-                                                <div >
-                                                    <?php foreach ($v['child'] as $m=>$n): ?>
-                                                        <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$n['id']]) ?>">
-                                                            <h2 style="padding-right: 10px;text-align: center"><?= $n['title'] ?></h2>
-                                                        </a>
-                                                    <?php endforeach; ?>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.yamm-content --></li>
-                                </ul>
-                            </li>
+                            <?php foreach ($this->params['menu'] as $k => $v): ?>
+                                <li class="dropdown">
+                                    <a href="<?= \yii\helpers\Url::to(['goods/list?cid=' . $v['id']]) ?>"
+                                       class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="yamm-content">
+                                                <div class="row">
+                                                    <div>
+                                                        <?php foreach ($v['child'] as $m => $n): ?>
+                                                            <a href="<?= \yii\helpers\Url::to(['goods/list?cid=' . $n['id']]) ?>">
+                                                                <h2 style="padding-right: 10px;text-align: center"><?= $n['title'] ?></h2>
+                                                            </a>
+                                                        <?php endforeach; ?>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+                                            </div><!-- /.yamm-content --></li>
+                                    </ul>
+                                </li>
                             <?php endforeach; ?>
 
                         </ul><!-- /.navbar-nav -->
@@ -269,7 +290,6 @@
 
 
     <?= $content ?>
-
 
 
     <footer id="footer" class="color-bg">
@@ -294,7 +314,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -311,7 +333,9 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-02.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-02.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -329,7 +353,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-03.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-03.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -337,7 +363,8 @@
                             </ul>
                         </div><!-- /.body -->
                     </div> <!-- /.widget -->
-                    <!-- ============================================================= FEATURED PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+                    <!-- ============================================================= FEATURED PRODUCTS : END ============================================================= -->
+                </div><!-- /.col -->
 
                 <div class="col-xs-12 col-sm-4 ">
                     <!-- ============================================================= ON SALE PRODUCTS ============================================================= -->
@@ -357,7 +384,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-04.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-04.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -366,7 +395,8 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in - White</a>
+                                            <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in -
+                                                White</a>
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -375,7 +405,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-05.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-05.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -393,7 +425,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-06.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-06.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -401,7 +435,8 @@
                             </ul>
                         </div><!-- /.body -->
                     </div> <!-- /.widget -->
-                    <!-- ============================================================= ON SALE PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+                    <!-- ============================================================= ON SALE PRODUCTS : END ============================================================= -->
+                </div><!-- /.col -->
 
                 <div class="col-xs-12 col-sm-4 ">
                     <!-- ============================================================= TOP RATED PRODUCTS ============================================================= -->
@@ -421,7 +456,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-07.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-07.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -439,7 +476,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-08.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-08.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -448,7 +487,8 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Surface RT 64GB, Wi-Fi, 10.6in - Dark Titanium</a>
+                                            <a href="single-product.html">Surface RT 64GB, Wi-Fi, 10.6in - Dark
+                                                Titanium</a>
                                             <div class="price">
                                                 <div class="price-prev">￥2000</div>
                                                 <div class="price-current">￥1873</div>
@@ -457,7 +497,9 @@
 
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
-                                                <img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif" data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-09.jpg" />
+                                                <img alt=""
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-09.jpg"/>
                                             </a>
                                         </div>
 
@@ -466,7 +508,8 @@
                             </ul>
                         </div><!-- /.body -->
                     </div><!-- /.widget -->
-                    <!-- ============================================================= TOP RATED PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+                    <!-- ============================================================= TOP RATED PRODUCTS : END ============================================================= -->
+                </div><!-- /.col -->
 
             </div><!-- /.widgets-row-->
         </div><!-- /.container -->
@@ -488,7 +531,8 @@
                     <!-- ============================================================= CONTACT INFO ============================================================= -->
                     <div class="contact-info">
                         <div class="footer-logo">
-                            <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG" width="233" height="54"/>
+                            <img alt="logo" src="/home/images/logo.PNG"
+                                 width="233" height="54"/>
                         </div><!-- /.footer-logo -->
 
                         <p class="regular-bold"> 请通过电话，电子邮件随时联系我们</p>
@@ -512,7 +556,8 @@
                         </div>--><!-- /.social-icons -->
 
                     </div>
-                    <!-- ============================================================= CONTACT INFO : END ============================================================= -->            </div>
+                    <!-- ============================================================= CONTACT INFO : END ============================================================= -->
+                </div>
 
                 <div class="col-xs-12 col-md-8 no-margin">
                     <!-- ============================================================= LINKS FOOTER ============================================================= -->
@@ -564,7 +609,8 @@
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->
-                    <!-- ============================================================= LINKS FOOTER : END ============================================================= -->            </div>
+                    <!-- ============================================================= LINKS FOOTER : END ============================================================= -->
+                </div>
             </div><!-- /.container -->
         </div><!-- /.link-list-row -->
 
@@ -578,10 +624,18 @@
                 <div class="col-xs-12 col-sm-6 no-margin">
                     <div class="payment-methods ">
                         <ul>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-visa.png"></li>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-master.png"></li>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-paypal.png"></li>
-                            <li><img alt="" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-skrill.png"></li>
+                            <li><img alt=""
+                                     src="/home/images/payments/payment-visa.png">
+                            </li>
+                            <li><img alt=""
+                                     src="/home/images/payments/payment-master.png">
+                            </li>
+                            <li><img alt=""
+                                     src="/home/images/payments/payment-paypal.png">
+                            </li>
+                            <li><img alt=""
+                                     src="/home/images/payments/payment-skrill.png">
+                            </li>
                         </ul>
                     </div><!-- /.payment-methods -->
                 </div>
@@ -589,32 +643,17 @@
         </div><!-- /.copyright-bar -->
 
     </footer><!-- /#footer -->
-    <!-- ============================================================= FOOTER : END ============================================================= -->	</div><!-- /.wrapper -->
+    <!-- ============================================================= FOOTER : END ============================================================= -->
+</div><!-- /.wrapper -->
 
-<!-- JavaScripts placed at the end of the document so the pages load faster -->
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-1.10.2.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-migrate-1.2.1.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/gmap3.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-hover-dropdown.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/owl.carousel.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/css_browser_selector.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/echo.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.easing-1.3.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-slider.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.raty.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.prettyPhoto.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.customSelect.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/wow.min.js"></script>
-<script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/scripts.js"></script>
 
 <script>
-    $("#createlink").click(function(){
+    $("#createlink").click(function () {
         $(".billing-address").slideDown();
     });
-
 </script>
+
 <?php $this->endBody() ?>
-<?php $this->endPage();?>
+<?php $this->endPage(); ?>
 </body>
 </html>

@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 no-margin">
                                     <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-small-01.jpg" />
+                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-01.jpg" />
                                     </a>
                                 </div>
                                 <div class="col-xs-8 col-sm-8 no-margin">
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 no-margin">
                                     <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-small-02.jpg" />
+                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-02.jpg" />
                                     </a>
                                 </div>
                                 <div class="col-xs-8 col-sm-8 no-margin">
@@ -81,7 +81,7 @@
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 no-margin">
                                     <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-small-03.jpg" />
+                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-03.jpg" />
                                     </a>
                                 </div>
                                 <div class="col-xs-8 col-sm-8 no-margin">
@@ -98,7 +98,7 @@
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 no-margin">
                                     <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-small-01.jpg" />
+                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-01.jpg" />
                                     </a>
                                 </div>
                                 <div class="col-xs-8 col-sm-8 no-margin">
@@ -115,7 +115,7 @@
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 no-margin">
                                     <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-small-02.jpg" />
+                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-02.jpg" />
                                     </a>
                                 </div>
                                 <div class="col-xs-8 col-sm-8 no-margin">
@@ -302,7 +302,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-01.jpg" />
+                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-01.jpg" />
                                                 </div>
                                             </div><!-- /.image-holder -->
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
@@ -334,7 +334,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-02.jpg" />
+                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-02.jpg" />
                                                 </div>
                                             </div><!-- /.image-holder -->
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
@@ -369,7 +369,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-03.jpg" />
+                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-03.jpg" />
                                                 </div>
                                             </div><!-- /.image-holder -->
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
@@ -402,7 +402,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-04.jpg" />
+                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-04.jpg" />
                                                 </div>
                                             </div><!-- /.image-holder -->
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">
@@ -433,7 +433,7 @@
                                         <div class="row">
                                             <div class="no-margin col-xs-12 col-sm-4 image-holder">
                                                 <div class="image">
-                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/product-05.jpg" />
+                                                    <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-05.jpg" />
                                                 </div>
                                             </div><!-- /.image-holder -->
                                             <div class="no-margin col-xs-12 col-sm-5 body-holder">

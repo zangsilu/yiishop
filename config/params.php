@@ -3,8 +3,8 @@
 return [
     'adminEmail' => 'admin@example.com',
     'pageSize' => [
-        'manage' => 2,//后台管理员列表分页,每页显示条数
-        'user'   => 1,//后台用户列表分页,每页显示条数
+        'manage' => 20,//后台管理员列表分页,每页显示条数
+        'user'   => 10,//后台用户列表分页,每页显示条数
         'goods'   => 10,
         'order'   => 10,
     ],

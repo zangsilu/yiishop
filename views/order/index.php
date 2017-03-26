@@ -215,7 +215,7 @@
         <?php endforeach; ?>
     </div>
 
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-1.10.2.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
         $('#getExpress a').hover(function () {
             $(this).parent().find('#expressContent').show();

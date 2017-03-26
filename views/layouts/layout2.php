@@ -1,17 +1,29 @@
+
+<?php
+/* @var $this \yii\web\View */
+use app\assets\AppAsset;
+
+/* @var $content string */
+AppAsset::register($this);
+$this-> beginPage();
+?>
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html <?= Yii::$app->language; ?>>
 <head>
+    <?php $this->head(); ?>
     <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="<?php echo \yii\helpers\Url::home(true) ?>author" content="">
-    <meta name="keywords" content="">
-    <meta name="robots" content="<?php echo \yii\helpers\Url::home(true) ?>all">
+    <meta charset="<?php echo Yii::$app->charset; ?>">
+    <?php
+    $this->registerMetaTag(['http-equiv' => 'Content-Type', 'content' => 'text/html; charset=UTF-8']);
+    $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0, user-scalable=no']);
+    $this->registerMetaTag(['name' => 'description', 'content' => 'this is yii framework project']);
+    $this->registerMetaTag(['name' => 'author', 'content' => 'zangsilu']);
+    $this->registerMetaTag(['name' => 'keywords', 'content' => 'zangsilu, yii2, assets']);
+    $this->registerMetaTag(['name' => 'robots', 'content' => 'all']);
+    ?>
 
     <title>
-        <?= \yii\helpers\Html::encode($this->title) ?>
+        <?= \yii\helpers\Html::encode($this->title).' 木瓜商城' ?>
     </title>
 
     <!-- Bootstrap Core CSS -->
@@ -33,29 +45,30 @@
 
     <!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
     <!--[if lt IE 9]>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/html5shiv.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/respond.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/html5shiv.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/respond.min.js"></script>
     <![endif]-->
 
     <!-- JavaScripts placed at the end of the document so the pages load faster -->
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-1.10.2.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery-migrate-1.2.1.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/gmap3.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-hover-dropdown.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/owl.carousel.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/css_browser_selector.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/echo.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.easing-1.3.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/bootstrap-slider.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.raty.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.prettyPhoto.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/jquery.customSelect.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/wow.min.js"></script>
-    <script src="<?php echo \yii\helpers\Url::home(true) ?>assets/js/scripts.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery-1.10.2.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery-migrate-1.2.1.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/bootstrap.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/gmap3.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/bootstrap-hover-dropdown.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/owl.carousel.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/css_browser_selector.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/echo.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery.easing-1.3.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/bootstrap-slider.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery.raty.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery.prettyPhoto.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery.customSelect.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/wow.min.js"></script>
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/scripts.js"></script>
 
 
 </head>
+<?php $this->beginBody(); ?>
 <body>
 
 <div class="wrapper">
@@ -116,7 +129,7 @@
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
                     <a href="/">
-                        <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG"
+                        <img alt="logo" src="/home/images/logo.PNG"
                              />
                     </a>
                 </div><!-- /.logo -->
@@ -129,7 +142,7 @@
                         <i class="fa fa-phone"></i> (+086) 123 456 7890
                     </div>
                     <div class="contact inline">
-                        <i class="fa fa-envelope"></i> contact@<span class="le-color">jason.com</span>
+                        <i class="fa fa-envelope"></i> contact@<span class="le-color">zangsilu.com</span>
                     </div>
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
@@ -176,7 +189,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <div class="basket-item-count">
                                     <span class="count">3</span>
-                                    <img src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/icon-cart.png"
+                                    <img src="/home/images/icon-cart.png"
                                          alt=""/>
                                 </div>
 
@@ -195,7 +208,7 @@
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
                                                     <img alt=""
-                                                         src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
+                                                         src="/home/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -213,7 +226,7 @@
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
                                                     <img alt=""
-                                                         src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
+                                                         src="/home/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -231,7 +244,7 @@
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
                                                     <img alt=""
-                                                         src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
+                                                         src="/home/images/products/product-small-01.jpg"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">
@@ -297,8 +310,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-01.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -317,8 +330,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-02.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-02.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -338,8 +351,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-03.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-03.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -371,8 +384,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-04.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-04.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -393,8 +406,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-05.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-05.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -414,8 +427,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-06.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-06.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -447,8 +460,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-07.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-07.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -468,8 +481,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-08.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-08.jpg"/>
                                             </a>
                                         </div>
                                     </div>
@@ -490,8 +503,8 @@
                                         <div class="col-xs-12 col-sm-3 no-margin">
                                             <a href="#" class="thumb-holder">
                                                 <img alt=""
-                                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-09.jpg"/>
+                                                     src="/home/images/blank.gif"
+                                                     data-echo="/home/images/products/product-small-09.jpg"/>
                                             </a>
                                         </div>
 
@@ -523,7 +536,7 @@
                     <!-- ============================================================= CONTACT INFO ============================================================= -->
                     <div class="contact-info">
                         <div class="footer-logo">
-                            <img alt="logo" src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/logo.PNG"
+                            <img alt="logo" src="/home/images/logo.PNG"
                                  width="233" height="54"/>
                         </div><!-- /.footer-logo -->
 
@@ -617,16 +630,16 @@
                     <div class="payment-methods ">
                         <ul>
                             <li><img alt=""
-                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-visa.png">
+                                     src="/home/images/payments/payment-visa.png">
                             </li>
                             <li><img alt=""
-                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-master.png">
+                                     src="/home/images/payments/payment-master.png">
                             </li>
                             <li><img alt=""
-                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-paypal.png">
+                                     src="/home/images/payments/payment-paypal.png">
                             </li>
                             <li><img alt=""
-                                     src="<?php echo \yii\helpers\Url::home(true) ?>assets/images/payments/payment-skrill.png">
+                                     src="/home/images/payments/payment-skrill.png">
                             </li>
                         </ul>
                     </div><!-- /.payment-methods -->
@@ -647,4 +660,8 @@
 </script>
 
 </body>
+<?php $this->endBody(); ?>
 </html>
+<?php
+$this->endPage();
+?>

@@ -49,7 +49,6 @@ class OrderController extends BaseController
         return $this->render('list',compact('data','pager'));
     }
 
-
     /**
      * 订单详情
      * @return string

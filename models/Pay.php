@@ -30,11 +30,11 @@ class Pay
                 ->asArray()
                 ->all();
             $goodsNames = ArrayHelper::getColumn($goodsNames,'goods_name');
+
             $body = '';
             $body .= implode('-',$goodsNames);
             $body .= ' 等商品';
-            $showUrl = "http://shop.mr-jason.com";
-
+            $showUrl = "http://shop.mr-Jason.com";
             //实例话支付宝支付类
             $alipay = new AlipayPay();
             $html = $alipay -> requestPay($order_id,$giftname,$amount,$body,$showUrl);
