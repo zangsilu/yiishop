@@ -12,6 +12,10 @@ use yii\data\Pagination;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
+/**
+ * Class Category
+ * @package app\models
+ */
 class Category extends ActiveRecord{
 
     public function behaviors()
@@ -37,7 +41,7 @@ class Category extends ActiveRecord{
     public function rules()
     {
         return [
-            ['pid','required','message'=>'所属分类不能为空!'],
+            ['pid','required','message'=>'所属分类不能为空!','except'=>'rename'],
             ['title','required','message'=>'分类名称不能为空!'],
             ['created_at','safe'],
         ];

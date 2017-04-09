@@ -57,3 +57,55 @@ use yiidreamteam\jstree\JsTree;
     </div>
 </div>
 <!-- end main container -->
+
+<?php
+
+$csrfVar = Yii::$app->request->csrfParam;
+$csrfVal = Yii::$app->request->csrfToken;
+$urlRename = \yii\helpers\Url::to(['category/rename']);
+$urlDelete = \yii\helpers\Url::to(['category/delete']);
+$urlCreate = \yii\helpers\Url::to(['category/add-child']);
+$js = <<<JS
+    $('#w0').on('rename_node.jstree',function(e,data) {
+    var newText = data.text;
+    var oldText = data.old;
+    var id = data.node.id;
+    var postData = {'$csrfVar':'$csrfVal','newText':newText,'oldText':oldText,'id':id};
+    $.post('$urlRename',postData,function (data) {
+      if(data.code != 0){
+          alert(data.message);
+          location.href = location.href;
+      }
+    })
+    }).on('delete_node.jstree',function(e,data) {
+    var id = data.node.id;
+    var postData = {'$csrfVar':'$csrfVal','id':id};
+    $.getJSON('$urlDelete',postData,function (data) {
+      if(data.code != 0){
+          alert(data.message);
+          // location.href = location.href;
+          window.location.reload();
+      }
+    })
+    })
+//    .on('create_node.jstree',function(e,data) {
+//    var id = data.node.id;
+//    var title =  data.text;
+//    var postData = {'$csrfVar':'$csrfVal','pid':id,'title':title};
+//    $.getJSON('$urlDelete',postData,function (data) {
+//      if(data.code != 0){
+//          alert(data.message);
+//          return false;
+//      }
+//    })
+//    })
+    
+    
+JS;
+
+$this->registerJs($js);
+
+
+
+
+?>

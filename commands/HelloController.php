@@ -29,4 +29,34 @@ class HelloController extends Controller
 
 
     }
+
+    public function actionA($arr1=[],$arr2=[])
+    {
+
+        $arr1 = [2,3,6];
+        $arr2 = [1,3,5];
+        $arr = array_merge($arr1,$arr2);
+        $length = count($arr);
+
+        for($i = 0; $i<$length; $i++){
+            for($j=0; $j<$length-1-$i; $j++){
+                if($arr[$j] > $arr[$j+1]){
+                    $temp = $arr[$j];
+                    $arr[$j] = $arr[$j+1];
+                    $arr[$j+1] = $temp;
+                }
+            }
+        }
+
+        print_r($arr);
+
+
+
+
+
+
+
+
+    }
+
 }

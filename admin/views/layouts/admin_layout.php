@@ -30,6 +30,21 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <!-- scripts -->
+    <script src="/assets/admin/js/jquery-latest.js"></script>
+    <script src="/assets/admin/js/bootstrap.min.js"></script>
+    <script src="/assets/admin/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <!-- knob -->
+    <script src="/assets/admin/js/jquery.knob.js"></script>
+    <!-- flot charts -->
+    <script src="/assets/admin/js/jquery.flot.js"></script>
+    <script src="/assets/admin/js/jquery.flot.stack.js"></script>
+    <script src="/assets/admin/js/jquery.flot.resize.js"></script>
+    <script src="/assets/admin/js/theme.js"></script>
+    <script src="/assets/admin/js/wysihtml5-0.3.0.js"></script>
+    <script src="/assets/admin/js/bootstrap-wysihtml5-0.0.2.js"></script>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style type="text/css">
@@ -242,19 +257,7 @@
 <?= $content ?>
 
 
-<!-- scripts -->
-<script src="/assets/admin/js/jquery-latest.js"></script>
-<script src="/assets/admin/js/bootstrap.min.js"></script>
-<script src="/assets/admin/js/jquery-ui-1.10.2.custom.min.js"></script>
-<!-- knob -->
-<script src="/assets/admin/js/jquery.knob.js"></script>
-<!-- flot charts -->
-<script src="/assets/admin/js/jquery.flot.js"></script>
-<script src="/assets/admin/js/jquery.flot.stack.js"></script>
-<script src="/assets/admin/js/jquery.flot.resize.js"></script>
-<script src="/assets/admin/js/theme.js"></script>
-<script src="/assets/admin/js/wysihtml5-0.3.0.js"></script>
-<script src="/assets/admin/js/bootstrap-wysihtml5-0.0.2.js"></script>
+
 
 
 <script type="text/javascript">
