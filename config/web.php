@@ -23,6 +23,7 @@ $config = [
         'user'         => [
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['/member/auth'],//默认登入页
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

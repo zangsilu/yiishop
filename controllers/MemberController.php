@@ -81,9 +81,13 @@ class MemberController extends CommonController{
     /* 前台退出登入 */
     public function actionLogout(){
 
-        \Yii::$app->session->remove('username');
+       /* \Yii::$app->session->remove('username');
         \Yii::$app->session->remove('isLogin');
         if(!isset(\Yii::$app->session['isLogin'])){
+            return $this->goBack(Yii::$app->request->referrer);
+        }*/
+        
+        if(Yii::$app->user->logout()){
             return $this->goBack(Yii::$app->request->referrer);
         }
 

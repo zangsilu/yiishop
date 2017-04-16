@@ -17,31 +17,45 @@ use app\models\Pay;
 use app\models\User;
 use dzer\express\Express;
 use Yii;
+use yii\filters\AccessControl;
 
 class OrderController extends CommonController
 {
-
-    public function beforeAction($action)
+    public function behaviors()
     {
-        if (empty(Yii::$app->session['username'])) {
-            $this->redirect(['member/auth']);
-            return false;
-        }
-        return parent::beforeAction($action);
+        return [
+            'accessFilter' => [
+                'class'  => AccessControl::className(),
+                'only'   => ['*'],//所有方法都受管制
+                'except' => [],//除此之外
+                'rules'  => [
+                    [
+                        'allow'   => false,//不允许访问
+                        'actions' => ['*'],// * 表示所有,如果要限制单独某些方法,直接写方法名字
+                        'roles'   => ['?'],// ? 表示 guest 未登入的
+                    ],
+                    [
+                        'allow'   => true,//允许访问
+                        'actions' => ['*'],//*表示所有,如果要限制单独某些方法,直接写方法名字
+                        'roles'   => ['@'],// @ 表示 登入用户
+                    ],
+                ],
+            ],
+        ];
     }
-
+    
+    
     /* 订单结算页 */
     public function actionCheckout()
     {
-
         //指定页面使用的布局文件
         $this->layout = 'layout2';
-
+        
         $order_id = Yii::$app->request->get('order_id');
         if (empty($order_id)) {
             return $this->redirect(['order/index']);
         }
-
+        
         //判断当前订单是否是该用户的
         $username = Yii::$app->session['username'];
         $user_id = User::find()->where(['useremail' => $username])->one()->id;
@@ -49,16 +63,16 @@ class OrderController extends CommonController
         if (!$r) {
             return $this->redirect(['order/index']);
         }
-
+        
         //判断订单状态,非未付款订单不得进入订单结算页
         $status = Order::findOne($order_id)->status;
         if ($status != Order::PAYNO) {
             return $this->redirect(['order/index']);
         }
-
+        
         //获取收货地址列表
         $addressInfo = Address::find()->where(['user_id' => $user_id])->all();
-
+        
         //获取订单商品列表
         $orderGoodsInfo = OrderGoods::find()
             ->select('og.*,g.goods_img,g.goods_name')
@@ -67,26 +81,26 @@ class OrderController extends CommonController
             ->where(['og.order_id' => $order_id])
             ->asArray()
             ->all();
-
+        
         //获取快递列表
         $expressInfo = Yii::$app->params['express'];
-
+        
         //获取订单总价(不含运费)
         $orderAmount = 0;
         foreach ($orderGoodsInfo as $k => $v) {
             $orderAmount += $v['goods_num'] * $v['goods_price'];
         }
-
-
+        
+        
         return $this->render('checkout', compact('addressInfo', 'orderGoodsInfo', 'expressInfo', 'orderAmount'));
     }
-
+    
     /* 订单列表页 */
     public function actionIndex()
     {
         //指定页面使用的布局文件
         $this->layout = 'layout1';
-
+        
         $orderList = Order::find()->alias('o')
             ->select('o.*,a.shou_name')
             ->leftJoin(Address::tableName() . ' a', 'o.address_id=a.id')
@@ -111,14 +125,14 @@ class OrderController extends CommonController
         }
         return $this->render('index', compact('orderList'));
     }
-
+    
     /**
      * 生成订单
      */
     public function actionAdd()
     {
         $orderModel = new Order();
-
+        
         $transaction = Yii::$app->db->beginTransaction();
         try {
             $username = Yii::$app->session['username'];
@@ -129,19 +143,19 @@ class OrderController extends CommonController
                 ->leftJoin(Goods::tableName() . ' g', 'c.goods_id = g.id')
                 ->leftJoin(User::tableName() . ' u', 'c.username = u.useremail')
                 ->where(['c.username' => $username])->asArray()->all();
-
+            
             $amount = 0;
             foreach ($cartInfo as $k => $v) {
                 $amount += $v['goods_num'] * $v['goods_price'];
             }
-
+            
             $orderModel->user_id = $cartInfo[0]['uid'];
             $orderModel->amount = $amount;
             $orderModel->status = Order::PAYNO;
             if (!$orderModel->save()) {
                 throw new \Exception;
             }
-
+            
             $order_id = $orderModel->primaryKey;
             foreach ($cartInfo as $k => $v) {
                 //TODO:必须在循环里面创建新对象,这样才会一直是insert,如果在循环外面创建的话,第二次就会变成update了,因为第二次的已经不是新对象了,它把第一次插入的数据又带出来了,赋给该对象自己了;
@@ -158,7 +172,7 @@ class OrderController extends CommonController
                 //商品库存 减1
                 Goods::updateAllCounters(['goods_num' => -$v['goods_num']], ['id' => $v['goods_id']]);
             }
-
+            
             //2张表都插入成功,则提交事务;
             $transaction->commit();
         } catch (\Exception $e) {
@@ -169,8 +183,8 @@ class OrderController extends CommonController
         }
         $this->redirect(['order/checkout', 'order_id' => $order_id]);
     }
-
-
+    
+    
     /**
      * 当选择快递时,ajax改变订单总价
      */
@@ -178,18 +192,18 @@ class OrderController extends CommonController
     {
         $order_id = Yii::$app->request->get('order_id');
         $express = Yii::$app->request->get('express');
-
+        
         //获取快递所对应的运费
         $expressPrice = Yii::$app->params['express'][$express][1];
         $expressName = Yii::$app->params['express'][$express][0];
-
+        
         //获取订单商品总价(不含运费)
         $orderGoodsInfo = OrderGoods::find()->where(['order_id' => $order_id])->asArray()->all();
         $orderAmount = 0;
         foreach ($orderGoodsInfo as $k => $v) {
             $orderAmount += $v['goods_num'] * $v['goods_price'];
         }
-
+        
         //重新计算订单总价并更新,以及快递信息更新(加上运费)
         $username = Yii::$app->session['username'];
         $user_id = User::find()->where(['useremail' => $username])->one()->id;
@@ -197,12 +211,12 @@ class OrderController extends CommonController
         Order::updateAll(
             ['amount' => $amount, 'express' => $expressName],
             ['id' => $order_id, 'user_id' => $user_id]);
-
+        
         //返回总价
         return json_encode(['amount' => $amount]);
-
+        
     }
-
+    
     /**
      * 订单支付
      */
@@ -210,7 +224,7 @@ class OrderController extends CommonController
     {
         $username = Yii::$app->session['username'];
         $user_id = User::find()->where(['useremail' => $username])->one()->id;
-
+        
         try {
             $order_id = Yii::$app->request->post('orderId');
             $address_id = Yii::$app->request->post('address');
@@ -219,31 +233,31 @@ class OrderController extends CommonController
             if (empty($order_id) || empty($payType)) {
                 throw new \Exception;
             }
-
+            
             $orderModel = Order::findOne(['id' => $order_id, 'user_id' => $user_id]);
             if (empty($orderModel)) {
                 throw new \Exception;
             }
-
+            
             $orderModel->address_id = $address_id;
             $orderModel->payType = $payType;
             if (!$orderModel->save()) {
                 throw new \Exception;
             }
-
+            
             //调用支付宝支付接口
             if ($payType == '支付宝') {
                 Pay::aliPay($order_id);
             }
-
-
+            
+            
         } catch (\Exception  $e) {
-             /*var_dump($e);
-             die;*/
+            /*var_dump($e);
+            die;*/
             $this->redirect(['index/index']);
         }
     }
-
+    
     /**
      * 物流查询
      */
@@ -257,7 +271,7 @@ class OrderController extends CommonController
         }
         return $result;
     }
-
+    
     /**
      * 确认收货
      */
@@ -267,14 +281,14 @@ class OrderController extends CommonController
         if (!empty($order_id)) {
             $orderInfo = Order::findOne($order_id);
         }
-
+        
         if (!empty($orderInfo) && $orderInfo->status == Order::SENDED) {
             $orderInfo->status = Order::DONE;
         }
-
+        
         if ($orderInfo->save()) {
             return $this->redirect(['order/index']);
         }
     }
-
+    
 }
