@@ -7,9 +7,11 @@
  */
 namespace app\admin\models;
 
+use Yii;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class Admin extends ActiveRecord{
+class Admin extends ActiveRecord implements IdentityInterface {
 
     //定义一个admin表中没有的字段("记住我"),用于创建表单
     public $rememberMe = false;//默认不"记住我";
@@ -41,7 +43,7 @@ class Admin extends ActiveRecord{
             ['admin_pass','required','message'=>'密码不能为空!','on'=>['login','changepass','add','changeemail']],
             ['repass','required','message'=>'确认密码不能为空!','on'=>['changepass','add']],
             ['rememberMe','boolean','on'=>'login'],
-            ['admin_pass','validatePass','on'=>['login','changeemail']],
+            ['admin_pass','validatePass','on'=>['changeemail']],
             ['admin_email','required','message'=>'邮箱不能为空!','on'=>['seekpass','add','changeemail']],
             ['admin_email','email','message'=>'邮箱格式不正确!','on'=>['seekpass','add','changeemail']],
             ['admin_email','unique','message'=>'邮箱已存在!','on'=>['add','changeemail']],
@@ -95,20 +97,17 @@ class Admin extends ActiveRecord{
             if($this->save(false)){
                 return true;
             }
-            return false;
         }
+        return false;
     }
 
     /* 管理员登录(执行验证,写入session) */
     public function login($data){
-
         //起个验证规则的作用域名称
         $this->scenario='login';
-
         //如果载入成功,并且验证成功
         if($this->load($data) && $this->validate()){
-
-            //判断是否勾选"记住密码";
+            /*//判断是否勾选"记住密码";
             $liftTime=$this->rememberMe ? 24*3600 : 0;
             //实例化session组件
             $session = \Yii::$app->session;
@@ -118,14 +117,26 @@ class Admin extends ActiveRecord{
             $session['admin']=[
                 'admin_user'=>$this->admin_user,
                 'isLogin' => 1,
-            ];
-            //更新登入时间与登入ip
-            $this->updateAll(['admin_login_time'=>time(),'admin_login_ip'=>ip2long(\Yii::$app->request->userIP)],'admin_user=:user',[':user'=>$this->admin_user]);
-            //返回bool
-            return (bool)$session['admin']['isLogin'];
+            ];*/
 
+            /**
+             * 使用admin用户组件实现登入
+             */
+            $result = Yii::$app->admin->login($this->getAdmin(),$this->rememberMe ? 24*3600*7 : 0);
+            if($result){
+                //更新登入时间与登入ip
+                self::updateAll(['admin_login_time'=>time(),'admin_login_ip'=>ip2long(Yii::$app->request->userIP)],'admin_user=:user',[':user' =>$this->admin_user]);
+                //返回bool
+                return true;
+            }
+            $this->addError('admin_pass','用户名或密码错误!');
         }
-            return false;
+        return false;
+    }
+
+    public function getAdmin()
+    {
+        return self::findOne(['admin_user'=>$this->admin_user,'admin_pass'=>md5($this->admin_pass)]);
     }
 
     /* 找回密码 */
@@ -137,16 +148,16 @@ class Admin extends ActiveRecord{
         //如果验证成功,那么就发送邮件
         if($this->load($data) && $this->validate()){
             //设置邮件发送的内容模板
-            $mailer = \Yii::$app->mailer->compose('layouts/seekpass',[
+            $mailer = Yii::$app->mailer->compose('layouts/seekpass',[
                 'admin_user'=>$this->admin_user,
                 'timestamp' =>time(),
                 'token' =>$this->createToken(time(),$this->admin_user)
             ])
-            ->setFrom(\Yii::$app->params['defaultValue']['admin_email'])
+            ->setFrom(Yii::$app->params['defaultValue']['admin_email'])
             ->setTo($this->admin_email)
             ->setSubject('木瓜商城-密码找回');
             if($mailer->send()){
-                \Yii::$app->session->setFlash('info','邮件发送成功,请查收!');
+                Yii::$app->session->setFlash('info','邮件发送成功,请查收!');
             }
         }
         return false;
@@ -155,7 +166,7 @@ class Admin extends ActiveRecord{
     /* 创建邮箱验证token */
     public function createToken($time,$user){
 
-        $userIp = \Yii::$app->request->userIP;
+        $userIp = Yii::$app->request->userIP;
         return md5($time.$user.base64_encode($userIp));
 
     }
@@ -184,5 +195,30 @@ class Admin extends ActiveRecord{
             return (bool)$this->updateAll(['admin_email'=>$this->admin_email],'admin_user = :user',[':user'=>$this->admin_user]);
         }
         return false;
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return null;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return null;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return true;
     }
 }

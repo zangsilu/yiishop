@@ -20,10 +20,26 @@ $config = [
         'cache'        => [
             'class' => 'yii\caching\FileCache',
         ],
+        /**
+         * 前台用户组件
+         */
         'user'         => [
             'identityClass'   => 'app\models\User',
+            'identityCookie' => ['name' => '_user_identity', 'httpOnly' => true],
+            'idParam' => '__user_id',
             'enableAutoLogin' => true,
             'loginUrl' => ['/member/auth'],//默认登入页
+        ],
+        /**
+         * 后台用户组件
+         */
+        'admin'         => [
+            'class' => 'yii\web\user',
+            'identityClass'   => 'app\admin\models\admin',
+            'identityCookie' => ['name' => '_admin_identity', 'httpOnly' => true],
+            'idParam' => '__admin_id',
+            'enableAutoLogin' => true,
+            'loginUrl' => ['admin/public/login'],//后台默认登入页
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

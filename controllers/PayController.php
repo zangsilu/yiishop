@@ -11,31 +11,32 @@
 namespace app\controllers;
 use app\models\Pay;
 use Yii;
+use yii\filters\AccessControl;
 
 class PayController extends CommonController
 {
-    
+
     public function behaviors()
     {
-        return [
+        return array_merge([
             'accessFilter' => [
                 'class'  => AccessControl::className(),
-                'only'   => ['*'],//所有方法都受管制
+                'only'   => ['*'],//不设置或设置为空或"*"表示所有方法都受管制
                 'except' => [],//除此之外
                 'rules'  => [
                     [
                         'allow'   => false,//不允许访问
-                        'actions' => ['*'],// * 表示所有,如果要限制单独某些方法,直接写方法名字
+                        'actions' => [],// 不设置或设置为空表示所有,如果要限制单独某些方法,直接写方法名字
                         'roles'   => ['?'],// ? 表示 guest 未登入的
                     ],
                     [
                         'allow'   => true,//允许访问
-                        'actions' => ['*'],//*表示所有,如果要限制单独某些方法,直接写方法名字
+                        'actions' => [],//不设置或设置为空表示所有,如果要限制单独某些方法,直接写方法名字
                         'roles'   => ['@'],// @ 表示 登入用户
                     ],
                 ],
             ],
-        ];
+        ], parent::behaviors());
     }
 
     //禁用csrf认证

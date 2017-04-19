@@ -11,10 +11,16 @@ namespace app\controllers;
 use app\models\User;
 use yii\bootstrap\Carousel;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 
 class MemberController extends CommonController{
+
+    //受HTTP请求类型控制的方法
+    /*protected $verbs = [
+      'auth' => ['post','get'],
+    ];*/
 
     //指定页面使用的布局文件
     public $layout = 'layout1';
@@ -86,11 +92,11 @@ class MemberController extends CommonController{
         if(!isset(\Yii::$app->session['isLogin'])){
             return $this->goBack(Yii::$app->request->referrer);
         }*/
-        
-        if(Yii::$app->user->logout()){
-            return $this->goBack(Yii::$app->request->referrer);
-        }
 
+       //false 表示只清除当前用户的session,而不是所有
+        if(Yii::$app->user->logout(false)){
+           $this->redirect(['/member/auth']);
+        }
     }
 
 }

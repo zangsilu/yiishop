@@ -20,7 +20,10 @@ class PublicController extends Controller{
     public function actionLogin(){
 
         //如果用户已经登入,直接跳转到后台首页
-        if(Yii::$app->session->has('admin')){
+        /*if(Yii::$app->session->has('admin')){
+            $this->redirect(['default/index']);
+        }*/
+        if(!Yii::$app->admin->isGuest){
             $this->redirect(['default/index']);
         }
 
@@ -43,10 +46,13 @@ class PublicController extends Controller{
     /* 管理员退出 */
     public function actionLogout(){
 
-        $session = Yii::$app->session;
-        $session->remove('admin');
+        /*$session = Yii::$app->session;
+        $session->remove('admin');*/
 
-        if(!isset($session['admin']['isLogin'])){
+        //false表示只移除当前用户的session,而不是所有
+        Yii::$app->admin->logout(false);
+
+        if(Yii::$app->admin->isGuest){
             $this->redirect(['public/login']);
         }
 

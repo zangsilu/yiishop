@@ -12,10 +12,24 @@ use app\models\Category;
 
 use app\models\Goods;
 
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class CommonController extends Controller
 {
+
+    protected $verbs = [];
+
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+          'verbFilter' => [
+            'class' => VerbFilter::className(),
+              'actions' => $this->verbs,
+          ],
+        ]);
+    }
+
     //该方法在调用每个继承该类的方法时自动执行
     public function init()
     {

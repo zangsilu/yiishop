@@ -65,10 +65,9 @@
         </button>
 
         <a class="brand" href="index.html" style="font-weight:700;font-family:Microsoft Yahei">木瓜商城 - 后台管理</a>
-
         <ul class="nav pull-right">
             <li style="color: red;font-size: 16px;line-height: 45px;margin-left:15px;">
-               <span>欢迎 <strong style="color: #fff;"><?= Yii::$app->session['admin']['admin_user'] ?></strong> 回来</span>
+               <span>欢迎 <strong style="color: #fff;"><?= isset(Yii::$app->admin->identity->admin_user) ?Yii::$app->admin->identity->admin_user: null; ?></strong> 回来</span>
             </li>
             <li class="hidden-phone">
                 <input class="search" type="text" />

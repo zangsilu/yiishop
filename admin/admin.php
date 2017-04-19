@@ -2,10 +2,12 @@
 
 namespace app\admin;
 
+use yii\base\Module;
+
 /**
  * admin module definition class
  */
-class admin extends \yii\base\Module
+class admin extends Module
 {
     /**
      * @inheritdoc

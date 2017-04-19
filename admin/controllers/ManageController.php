@@ -10,6 +10,7 @@ namespace app\admin\controllers;
 
 use app\admin\models\Admin;
 use yii\data\Pagination;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
 
