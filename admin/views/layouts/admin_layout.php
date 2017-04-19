@@ -70,7 +70,7 @@
                <span>欢迎 <strong style="color: #fff;"><?= isset(Yii::$app->admin->identity->admin_user) ?Yii::$app->admin->identity->admin_user: null; ?></strong> 回来</span>
             </li>
             <li class="hidden-phone">
-                <input class="search" type="text" />
+                <input class="search" type="text"  title=""/>
             </li>
             <li class="notification-dropdown hidden-phone">
                 <a href="#" class="trigger">
@@ -245,6 +245,17 @@
             </a>
             <ul class="submenu">
                 <li><a href="<?= \yii\helpers\Url::to(['order/index']) ?>">订单列表</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="dropdown-toggle" href="#">
+                <i class="icon-edit"></i>
+                <span>角色管理</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="<?= \yii\helpers\Url::to(['rbac/index']) ?>">角色列表</a></li>
+                <li><a href="<?= \yii\helpers\Url::to(['rbac/create']) ?>">添加角色</a></li>
             </ul>
         </li>
 
