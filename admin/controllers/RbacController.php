@@ -8,6 +8,8 @@
 namespace app\admin\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 
 class RbacController extends BaseController
 {
@@ -18,7 +20,14 @@ class RbacController extends BaseController
      */
     public function actionIndex()
     {
-
+        $auth = Yii::$app->authManager;
+        $data = new ActiveDataProvider([
+            'query' => (new Query) -> from($auth->itemTable)->where(['type'=>1])->orderBy('created_at desc'),
+            'pagination'=> [
+                'pageSize'=>10,
+            ]
+        ]);
+        return $this->render('_items',['dataProvider'=>$data]);
     }
 
     /**
@@ -46,4 +55,28 @@ class RbacController extends BaseController
         }
         return $this->render('_createItem');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
