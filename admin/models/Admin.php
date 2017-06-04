@@ -11,6 +11,14 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
+/**
+ * Class Admin
+ * @property string $admin_user
+ * @property string $admin_email
+ * @property string $admin_pass
+ *
+ * @package app\admin\models
+ */
 class Admin extends ActiveRecord implements IdentityInterface {
 
     //定义一个admin表中没有的字段("记住我"),用于创建表单

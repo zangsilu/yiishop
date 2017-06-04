@@ -42,7 +42,7 @@ echo \yii\helpers\Url::home(true) ?>assets/admin/css/compiled/user-list.css"
                                 return Html::a('更新', ['updateitem', 'name' => $model['name']]);
                             },
                             'delete' => function ($url, $model, $key) {
-                                return Html::a('删除', ['deleteitem', 'name' => $model['name']]);
+                                return Html::a('删除', ['delete', 'name' => $model['name']]);
                             }
                         ],
                     ],

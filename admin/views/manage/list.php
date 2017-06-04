@@ -38,7 +38,10 @@
                         <td><?= long2ip($v->admin_login_ip); ?></td>
                         <td><?= date('Y-m-d H:i:s',$v->admin_create_time); ?></td>
                         <td class="align-right">
-                            <a href="<?= \yii\helpers\Url::to(['manage/del','admin_id'=>$v->id]) ?>">删除</a></td>
+                            <a href="<?= \yii\helpers\Url::to(['manage/assign','adminid'=>$v->id]) ?>">授权</a>
+
+                        <a href="<?= \yii\helpers\Url::to(['manage/del','admin_id'=>$v->id]) ?>">删除</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>

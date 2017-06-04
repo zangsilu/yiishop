@@ -181,13 +181,55 @@
 
 <!-- sidebar -->
 <div id="sidebar-nav">
+
     <ul id="dashboard-menu">
+
+        <?php
+        $controller = Yii::$app->controller->id;
+        $action = Yii::$app->controller->action->id;
+        foreach (Yii::$app->params['adminmenu'] as $menu) {
+            $show = "hidden";
+            if (Yii::$app->admin->can($menu['module']. '/*') || Yii::$app->admin->can($menu['url'])) {
+                $show = "show";
+            } else {
+                if (empty($menu['submenu']) && !Yii::$app->admin->can($menu['url'])) {
+                    continue;
+                } else {
+                    foreach ($menu['submenu'] as $sub) {
+                        if (Yii::$app->admin->can($menu['module']. '/'. $sub['url'])) {
+                            $show = "show";
+                        }
+                    }
+                }
+            }
+            ?>
+            <li class="<?php echo $controller == $menu['module'] ? 'active' : ''; echo $show; ?>">
+                <a <?php echo !empty($menu['submenu']) ? 'class="dropdown-toggle"' : ''; ?> href="<?php echo $menu['url'] == '#' ? '#' : yii\helpers\Url::to([$menu['url']]); ?>">
+                    <i class="<?php echo $menu['icon'] ?>"></i>
+                    <span><?php echo $menu['label']; ?></span>
+                    <?php if (!empty($menu['submenu'])) : ?>
+                        <i class="icon-chevron-down"></i>
+                    <?php endif; ?>
+                </a>
+                <ul class="submenu <?php echo $controller == $menu['module'] && !empty($menu['submenu']) ? 'active' : ''; ?>">
+                    <?php foreach ($menu['submenu'] as $sub): ?>
+                        <?php if (!Yii::$app->admin->can($menu['module']. '/*') && !Yii::$app->admin->can($menu['module']. '/'. $sub['url'])) continue; ?>
+                        <li><a href="<?php echo yii\helpers\Url::to([$menu['module']. '/'. $sub['url']]); ?>"><?php echo $sub['label'] ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+            <?php
+        }
+        ?>
+
+    </ul>
+    <!--<ul id="dashboard-menu">
         <li class="active">
             <div class="pointer">
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
-            <a href="<?php echo \yii\helpers\Url::to(['default/index']) ?>">
+            <a href="<?php /*echo \yii\helpers\Url::to(['default/index']) */?>">
                 <i class="icon-home"></i>
                 <span>后台首页</span>
             </a>
@@ -199,8 +241,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?php echo \yii\helpers\Url::to(['manage/list']) ?>">管理员列表</a></li>
-                <li><a href="<?php echo \yii\helpers\Url::to(['manage/add']) ?>">加入新管理员</a></li>
+                <li><a href="<?php /*echo \yii\helpers\Url::to(['manage/list']) */?>">管理员列表</a></li>
+                <li><a href="<?php /*echo \yii\helpers\Url::to(['manage/add']) */?>">加入新管理员</a></li>
             </ul>
         </li>
 
@@ -211,8 +253,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?= \yii\helpers\Url::to(['user/list']) ?>">用户列表</a></li>
-                <li><a href="<?= \yii\helpers\Url::to(['user/add']) ?>">加入新用户</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['user/list']) */?>">用户列表</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['user/add']) */?>">加入新用户</a></li>
             </ul>
         </li>
         <li>
@@ -222,8 +264,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?= \yii\helpers\Url::to(['category/list']) ?>">分类列表</a></li>
-                <li><a href="<?= \yii\helpers\Url::to(['category/add'])?>">加入分类</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['category/list']) */?>">分类列表</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['category/add'])*/?>">加入分类</a></li>
             </ul>
         </li>
         <li>
@@ -233,8 +275,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?= \yii\helpers\Url::to(['goods/list']) ?>">商品列表</a></li>
-                <li><a href="<?= \yii\helpers\Url::to(['goods/add']) ?>">添加商品</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['goods/list']) */?>">商品列表</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['goods/add']) */?>">添加商品</a></li>
             </ul>
         </li>
         <li>
@@ -244,7 +286,7 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?= \yii\helpers\Url::to(['order/index']) ?>">订单列表</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['order/index']) */?>">订单列表</a></li>
             </ul>
         </li>
         <li>
@@ -254,13 +296,13 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?= \yii\helpers\Url::to(['rbac/index']) ?>">角色列表</a></li>
-                <li><a href="<?= \yii\helpers\Url::to(['rbac/create']) ?>">添加角色</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['rbac/index']) */?>">角色列表</a></li>
+                <li><a href="<?/*= \yii\helpers\Url::to(['rbac/create']) */?>">添加角色</a></li>
             </ul>
         </li>
 
 
-    </ul>
+    </ul>-->
 </div>
 <!-- end sidebar -->
 

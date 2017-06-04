@@ -7,10 +7,20 @@
 
 namespace app\admin\controllers;
 
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UnauthorizedHttpException;
+use yii\web\User;
 
-class BaseController extends Controller{
+/**
+ * Class BaseController
+ *
+ * @property User $admin
+ * @package app\admin\controllers
+ */
+class BaseController extends Controller
+{
 
     /* 用于检测是否登入,只有登入后才能访问后台 */
     /*public function beforeAction($action)
@@ -30,10 +40,10 @@ class BaseController extends Controller{
     /* 用于检测是否登入,只有登入后才能访问后台(使用ACF) */
     public function behaviors()
     {
-        return array_merge([
+        return array_merge(parent::behaviors(), [
             'accessFilter' => [
                 'class'  => AccessControl::className(),
-                'user'  => 'admin',
+                'user'   => 'admin',
                 'only'   => ['*'],//不设置或设置为空或"*"表示所有方法都受管制
                 'except' => [],//除此之外
                 'rules'  => [
@@ -49,6 +59,38 @@ class BaseController extends Controller{
                     ],
                 ],
             ],
-        ], parent::behaviors());
+        ]);
+    }
+
+
+    /**
+     * 后台权限验证
+     * @param \yii\base\Action $action
+     *
+     * @return bool
+     * @throws UnauthorizedHttpException
+     */
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $module = $action->controller->module->id;
+        $controller = $action->controller->id;
+        $action = $action->id;
+
+        //如果拥有全部权限
+        if (Yii::$app->admin->can($controller . '/*')) {
+            return true;
+        }
+
+        //否则精确判断权限
+        if (Yii::$app->admin->can($controller . '/' . $action)) {
+            return true;
+        }
+
+        //无访问权限
+        throw new UnauthorizedHttpException('无' . $controller . '/' . $action . '访问权限', 403);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
+$adminmenu = require(__DIR__ . '/adminmenu.php');
 
 $config = [
     'id'           => 'basic',
@@ -26,6 +27,7 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',//要使用的管理类
             'itemTable' => '{{%auth_item}}',//(这样写可以指定要使用的表,其他3个也一样,表前缀是在db.php文件配置的)
+            'defaultRoles' => ['default'],//当登入用户没有任何角色时,自动拥有该角色
         ],
         /**
          * 前台用户组件
@@ -87,7 +89,7 @@ $config = [
             ],
         ],
     ],
-    'params'       => $params,
+    'params'       => \yii\helpers\ArrayHelper::merge($params,['adminmenu'=>$adminmenu]),
 ];
 
 if (YII_ENV_DEV) {

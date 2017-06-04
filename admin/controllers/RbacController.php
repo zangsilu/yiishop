@@ -7,6 +7,7 @@
 
 namespace app\admin\controllers;
 
+use app\admin\models\Rbac;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
@@ -22,12 +23,13 @@ class RbacController extends BaseController
     {
         $auth = Yii::$app->authManager;
         $data = new ActiveDataProvider([
-            'query' => (new Query) -> from($auth->itemTable)->where(['type'=>1])->orderBy('created_at desc'),
-            'pagination'=> [
-                'pageSize'=>10,
-            ]
+            'query'      => (new Query)->from($auth->itemTable)
+                ->where(['type' => 1])->orderBy('created_at desc'),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
-        return $this->render('_items',['dataProvider'=>$data]);
+        return $this->render('_items', ['dataProvider' => $data]);
     }
 
     /**
@@ -56,27 +58,52 @@ class RbacController extends BaseController
         return $this->render('_createItem');
     }
 
+    /**
+     * 删除角色
+     */
+    public function actionDelete()
+    {
+        $name = Yii::$app->request->get('name');
+        $auth = Yii::$app->authManager;
 
+        if($auth->remove($auth->getRole($name))){
+            $this->redirect(['rbac/index']);
+        }
+    }
 
+    /**
+     * 分配权限
+     *
+     * @param $name
+     *
+     * @return string
+     */
+    public function actionAssignitem($name)
+    {
+        $name = htmlspecialchars($name);
+        $auth = Yii::$app->authManager;
+        $parent = $auth->getRole($name);
 
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (Rbac::addChild($post['children'], $name)) {
+                Yii::$app->session->setFlash('info', '分配成功');
+            }
+        }
 
+        //获取该角色所拥有的角色或权限
+        $children = Rbac::getChildrenByName($name);
 
+        $roles = Rbac::getOptions($auth->getRoles(), $parent);
+        $permissions = Rbac::getOptions($auth->getPermissions(), $parent);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $this->render('_assignitem', [
+            'parent'      => $parent,
+            'roles'       => $roles,
+            'permissions' => $permissions,
+            'children'    => $children,
+        ]);
+    }
 
 
 }
