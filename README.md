@@ -31,6 +31,4 @@
 ```
 
 ## 作者博客
-   *    [https://blog.pl39.com](https:blog.pl39.com) 
-   *    或
    *    [http://blog2.pl39.com](http:blog2.pl39.com) 
