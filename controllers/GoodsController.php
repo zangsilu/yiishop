@@ -7,6 +7,7 @@
  */
 namespace app\controllers;
 
+use app\elasticSearch\GoodsSearch;
 use app\models\Category;
 use app\models\Goods;
 use Yii;
@@ -44,4 +45,27 @@ class GoodsController extends CommonController{
 
     }
 
+    /**
+     * elasticSearch全文搜索
+     */
+    public function actionSearch()
+    {
+        $keyword = htmlentities(preg_replace('/\s/','',Yii::$app->request->get('keyword')));
+
+        $result = GoodsSearch::find()->query([
+            "multi_match"=>[
+                "query"=>$keyword,
+                "fields"=>['goods_name','goods_desc']
+            ]
+        ])->highlight([
+            "pre_tags"=>["<strong style='color: red'>"],
+            "post_tags"=>["</strong>"],
+            "fields"=>["goods_name"=>new \stdClass(),"goods_desc"=>new \stdClass()]
+        ])->all();
+
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+
+    }
 }

@@ -27,7 +27,6 @@ AppAsset::register($this);
     $this->registerMetaTag(['name' => 'keywords', 'content' => 'zangsilu, yii2, assets']);
     $this->registerMetaTag(['name' => 'robots', 'content' => 'all']);
     ?>
-
     <title>
         <?= \yii\helpers\Html::encode($this->title) . ' 木瓜商城' ?>
     </title>
@@ -36,6 +35,7 @@ AppAsset::register($this);
     <!-- Favicon -->
     <link rel="shortcut icon" href="/home/images/favicon.ico">
 
+    <script src="<?php echo \yii\helpers\Url::home(true) ?>home/js/jquery-1.10.2.min.js"></script>
 
 </head>
 <body>
@@ -105,9 +105,14 @@ AppAsset::register($this);
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
                 <div class="search-area">
-                    <form>
+                    <?php
+                    \yii\bootstrap\ActiveForm::begin([
+                            'action'=>['goods/search'],
+                            'method'=>'get'
+                    ])
+                    ?>
                         <div class="control-group">
-                            <input class="search-field" placeholder="搜索商品"/>
+                            <input class="search-field" placeholder="搜索商品" name="keyword"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
@@ -128,10 +133,12 @@ AppAsset::register($this);
                                 </li>
                             </ul>
 
-                            <a style="padding:15px 15px 13px 12px" class="search-button" href="#"></a>
+                            <a style="padding:15px 15px 13px 12px" class="search-button" href="javascript:document.getElementById('w3').submit();"></a>
 
                         </div>
-                    </form>
+                    <?php
+                    \yii\bootstrap\ActiveForm::end();
+                    ?>
                 </div><!-- /.search-area -->
                 <!-- ============================================================= SEARCH AREA : END ============================================================= -->
             </div><!-- /.top-search-holder -->

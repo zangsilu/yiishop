@@ -46,7 +46,7 @@ class AddressController extends CommonController
         if(Yii::$app->request->isPost){
             $post = yii::$app->request->post();
             $post['Address']['address'] = $post['Address']['address1'].$post['Address']['address2'];
-            $post['Address']['user_id'] = User::find()->where(['useremail'=>Yii::$app->session['username']])->one()->id;
+            $post['Address']['user_id'] = Yii::$app->user->id;
 
             $addressModel = new Address();
             if($addressModel->load($post) && $addressModel->save()){

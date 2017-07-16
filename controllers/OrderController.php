@@ -57,8 +57,7 @@ class OrderController extends CommonController
         }
         
         //判断当前订单是否是该用户的
-        $username = Yii::$app->session['username'];
-        $user_id = User::find()->where(['useremail' => $username])->one()->id;
+        $user_id = Yii::$app->user->id;
         $r = Order::find()->where(['id' => $order_id, 'user_id' => $user_id])->count();
         if (!$r) {
             return $this->redirect(['order/index']);
@@ -105,10 +104,11 @@ class OrderController extends CommonController
             ->select('o.*,a.shou_name')
             ->leftJoin(Address::tableName() . ' a', 'o.address_id=a.id')
             ->leftJoin(User::tableName() . ' u', 'o.user_id = u.id')
-            ->where(['u.useremail' => Yii::$app->session->get('username')])
+            ->where(['u.id' => Yii::$app->user->id])
             ->orderBy('id desc')
             ->asArray()
             ->all();
+
         foreach ($orderList as $k => $v) {
             $orderList[$k]['goodsInfo'] = OrderGoods::find()->alias('og')
                 ->select('og.*,g.goods_name,g.goods_img')
@@ -117,9 +117,12 @@ class OrderController extends CommonController
                 ->asArray()
                 ->all();
             $orderList[$k]['status'] = Order::$status[$v['status']];
+
             foreach (Yii::$app->params['express'] as $m => $n) {
                 if (in_array($v['express'], $n)) {
-                    $orderList[$k]['express_price'] = $n[1];
+                    $orderList[$k]['express_price'] = $n[1] ?? 0;
+                }else{
+                    $orderList[$k]['express_price'] = 0;
                 }
             }
         }
@@ -135,15 +138,13 @@ class OrderController extends CommonController
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
-            $username = Yii::$app->session['username'];
             //获取用户购物车中所有商品信息
             $cartInfo = Cart::find()
                 ->alias('c')
-                ->select('c.*,g.goods_price,u.id uid')
+                ->select('c.*,g.goods_price,c.username uid')
                 ->leftJoin(Goods::tableName() . ' g', 'c.goods_id = g.id')
-                ->leftJoin(User::tableName() . ' u', 'c.username = u.useremail')
-                ->where(['c.username' => $username])->asArray()->all();
-            
+                ->where(['c.username' => Yii::$app->user->id])->asArray()->all();
+
             $amount = 0;
             foreach ($cartInfo as $k => $v) {
                 $amount += $v['goods_num'] * $v['goods_price'];
@@ -152,6 +153,7 @@ class OrderController extends CommonController
             $orderModel->user_id = $cartInfo[0]['uid'];
             $orderModel->amount = $amount;
             $orderModel->status = Order::PAYNO;
+
             if (!$orderModel->save()) {
                 throw new \Exception;
             }
@@ -167,6 +169,7 @@ class OrderController extends CommonController
                 if (!$orderGoodsModel->save()) {
                     throw new \Exception;
                 }
+
                 //清空购物车中的该商品
                 Cart::deleteAll(['id' => $v['id']]);
                 //商品库存 减1
@@ -180,6 +183,7 @@ class OrderController extends CommonController
             //回滚
             $transaction->rollBack();
             $this->redirect(['cart/index']);
+
         }
         $this->redirect(['order/checkout', 'order_id' => $order_id]);
     }
@@ -205,8 +209,7 @@ class OrderController extends CommonController
         }
         
         //重新计算订单总价并更新,以及快递信息更新(加上运费)
-        $username = Yii::$app->session['username'];
-        $user_id = User::find()->where(['useremail' => $username])->one()->id;
+        $user_id = Yii::$app->user->id;
         $amount = $orderAmount + $expressPrice;
         Order::updateAll(
             ['amount' => $amount, 'express' => $expressName],
@@ -222,8 +225,7 @@ class OrderController extends CommonController
      */
     public function actionPay()
     {
-        $username = Yii::$app->session['username'];
-        $user_id = User::find()->where(['useremail' => $username])->one()->id;
+        $user_id = Yii::$app->user->id;
         
         try {
             $order_id = Yii::$app->request->post('orderId');

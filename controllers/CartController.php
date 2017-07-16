@@ -53,11 +53,11 @@ class CartController extends CommonController
     public function actionIndex()
     {
 
-        $username = Yii::$app->session['username'];
+        $userId = Yii::$app->user->id;
         $cartInfo = Cart::find()->alias('c')
             ->select('g.*,c.*,c.id cart_id,c.goods_num cart_goods_num')
             ->leftJoin(Goods::tableName() . ' g', 'c.goods_id = g.id')
-            ->where(['c.username' => $username])->asArray()->all();
+            ->where(['c.username' => $userId])->asArray()->all();
 
         //总价
         $total = 0;
@@ -75,7 +75,6 @@ class CartController extends CommonController
      */
     public function actionAdd()
     {
-
         $data = [];
         if (Yii::$app->request->isGet) {
             $goods_id = Yii::$app->request->get('gid');
@@ -84,19 +83,17 @@ class CartController extends CommonController
                 $goodsNum = 1;
                 $data['Cart']['goods_id'] = $goodsInfo->id;
                 $data['Cart']['goods_num'] = $goodsNum;
-                $data['Cart']['username'] = Yii::$app->session['username'];
+                $data['Cart']['username'] = Yii::$app->user->id;
             }
         }
-
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             if (!empty($post)) {
                 $data['Cart']['goods_id'] = $post['gid'];
                 $data['Cart']['goods_num'] = $post['goods_num'];
-                $data['Cart']['username'] = Yii::$app->session['username'];
+                $data['Cart']['username'] = Yii::$app->user->id;
             }
         }
-
         //判断购物车中是否已经有当前商品的数据了,有的话数量就累加
         $r = Cart::find()->where([
             'username' => $data['Cart']['username'],
@@ -136,11 +133,11 @@ class CartController extends CommonController
         }
         $cart->save();
 
-        $username = Yii::$app->session['username'];
+        $userId = Yii::$app->user->id;
         $cartInfo = Cart::find()->alias('c')
             ->select('g.*,c.*,c.id cart_id,c.goods_num cart_goods_num')
             ->leftJoin(Goods::tableName() . ' g', 'c.goods_id = g.id')
-            ->where(['c.username' => $username])->asArray()->all();
+            ->where(['c.username' => $userId])->asArray()->all();
 
         //总价
         $total = 0;
@@ -158,11 +155,11 @@ class CartController extends CommonController
 
         Cart::deleteAll(['id' => $cart_id]);
 
-        $username = Yii::$app->session['username'];
+        $userId = Yii::$app->user->id;
         $cartInfo = Cart::find()->alias('c')
             ->select('g.*,c.*,c.id cart_id,c.goods_num cart_goods_num')
             ->leftJoin(Goods::tableName() . ' g', 'c.goods_id = g.id')
-            ->where(['c.username' => $username])->asArray()->all();
+            ->where(['c.username' => $userId])->asArray()->all();
 
         //总价
         $total = 0;

@@ -17,7 +17,6 @@ class IndexController extends CommonController{
 
     /* 前台首页 */
     public function actionIndex(){
-
         return $this->render('index',compact('data'));
 
     }

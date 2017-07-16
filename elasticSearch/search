@@ -1,0 +1,16 @@
+{
+  "query": {
+    "multi_match": { //匹配多个字段的值
+      "query": "这是",//要匹配的字符
+      "fields": ["title", "descr"]//在这些字段中匹配
+    }
+  },
+  "highlight" : {
+    "pre_tags" : ["<i class=\"highlight\">"],
+    "post_tags" : ["</i>"],
+    "fields" : {
+      "title" : {},
+      "descr" : {}
+    }
+  }
+}

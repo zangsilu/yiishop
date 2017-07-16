@@ -12,7 +12,7 @@
  *************************注意*************************
  * 调试通知返回时，可查看或改写log日志的写入TXT里的数据，来检查通知返回是否正常
  */
-
+namespace app\Lib\AliPay;
 class AlipayNotify {
     /**
      * @var String HTTPS形式消息验证地址

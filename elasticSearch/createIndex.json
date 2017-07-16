@@ -1,0 +1,40 @@
+
+//创建索引
+
+//PUT 索引名称
+//PUT /yiishop
+
+{
+    "settings": {
+        "refresh_interval": "5s",//新插入的数据生效时间
+        "number_of_shards": 1,//服务器分片数量
+        "number_of_replicas": 0//副本数量
+    },
+    //要索引的字段一些配置
+    "mappings": {
+        "_default_": {
+            "_all": {
+                "enabled": true//索引多个字段,每个字段都生效
+            }
+        },
+        //设置索引字段的类型
+        "goods": {//如:商品大类
+            "dynamic": false,//动态映射
+            "properties": {//都有哪些字段
+                "id": {//字段1 id
+                    "type": "long" //类型 长整型
+                },
+                "goods_name": {//字段2 goods_name
+                    "type": "string", //类型 字符串
+                    "index": "analyzed",//使用分词器
+                    "analyzer": "ik_max_word"//分词器类型
+                },
+                "goods_desc": {
+                    "type": "string",
+                    "index": "analyzed",
+                    "analyzer": "ik_max_word"
+                }
+            }
+        }
+    }
+}

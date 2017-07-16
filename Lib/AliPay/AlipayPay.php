@@ -1,4 +1,7 @@
 <?php
+
+namespace app\Lib\AliPay;
+
 include_once 'AlipaySubmit.php';
 include_once 'AlipayCore.php';
 include_once 'AlipayMD5.php';

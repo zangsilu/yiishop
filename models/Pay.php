@@ -8,7 +8,7 @@
 namespace app\models;
 
 
-use AlipayPay;
+use app\Lib\AliPay\AlipayPay;
 use yii\helpers\ArrayHelper;
 
 class Pay

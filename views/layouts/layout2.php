@@ -147,9 +147,14 @@ $this-> beginPage();
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
                 <div class="search-area">
-                    <form>
+                    <?php
+                    \yii\bootstrap\ActiveForm::begin([
+                        'action'=>['goods/search'],
+                        'method'=>'get'
+                    ])
+                    ?>
                         <div class="control-group">
-                            <input class="search-field" placeholder="搜索商品"/>
+                            <input class="search-field" placeholder="搜索商品" name="keyword"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
@@ -170,10 +175,12 @@ $this-> beginPage();
                                 </li>
                             </ul>
 
-                            <a style="padding:15px 15px 13px 12px" class="search-button" href="#"></a>
+                            <a style="padding:15px 15px 13px 12px" class="search-button" href="javascript:document.getElementById('w3').submit();"></a>
 
                         </div>
-                    </form>
+                    <?php
+                    \yii\bootstrap\ActiveForm::end();
+                    ?>
                 </div><!-- /.search-area -->
                 <!-- ============================================================= SEARCH AREA : END ============================================================= -->
             </div><!-- /.top-search-holder -->

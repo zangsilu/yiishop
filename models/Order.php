@@ -10,16 +10,16 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "{{%order}}".
  *
- * @property string $id
- * @property string $user_id
- * @property string $address_id
- * @property string $express_id
- * @property string $express_no
- * @property string $amount
+ * @property string  $id
+ * @property string  $user_id
+ * @property string  $address_id
+ * @property string  $express_id
+ * @property string  $express_no
+ * @property string  $amount
  * @property integer $status
- * @property string $payType
- * @property string $created_at
- * @property string $updated_at
+ * @property string  $payType
+ * @property string  $created_at
+ * @property string  $updated_at
  */
 class Order extends ActiveRecord
 {
@@ -34,7 +34,7 @@ class Order extends ActiveRecord
 
     public function behaviors()
     {
-        return[
+        return [
             TimestampBehavior::className(),
         ];
     }
@@ -46,13 +46,14 @@ class Order extends ActiveRecord
     const TUIYES = 4;
     const DONE = 5;
 
-    public static $status = [
-        self::PAYNO => '未付款',
-        self::PAYSUCCESS  => '已付款',
-        self::SENDED   => '已发货',
-        self::TUIYES      => '已退货退款',
-        self::DONE    => '订单完成',
-    ];
+    public static $status
+        = [
+            self::PAYNO      => '未付款',
+            self::PAYSUCCESS => '已付款',
+            self::SENDED     => '已发货',
+            self::TUIYES     => '已退货退款',
+            self::DONE       => '订单完成',
+        ];
 
     /**
      * @inheritdoc
@@ -60,11 +61,14 @@ class Order extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'address_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [
+                ['user_id', 'address_id', 'status', 'created_at', 'updated_at'],
+                'integer',
+            ],
             [['amount'], 'number'],
             [['express_no'], 'string', 'max' => 60],
-            [['express','payType'], 'string', 'max' => 24],
-            [['trade_no','trade_text'], 'safe'],
+            [['express', 'payType'], 'string', 'max' => 24],
+            [['trade_no', 'trade_text'], 'safe'],
         ];
     }
 
@@ -74,13 +78,13 @@ class Order extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
+            'id'         => 'ID',
+            'user_id'    => 'User ID',
             'address_id' => 'Address ID',
             'express_id' => 'Express ID',
             'express_no' => 'Express No',
-            'amount' => 'Amount',
-            'status' => 'Status',
+            'amount'     => 'Amount',
+            'status'     => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
