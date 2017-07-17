@@ -11,6 +11,7 @@ use app\elasticSearch\GoodsSearch;
 use app\models\Category;
 use app\models\Goods;
 use Yii;
+use yii\data\Pagination;
 
 class GoodsController extends CommonController{
 
@@ -52,7 +53,17 @@ class GoodsController extends CommonController{
     {
         $keyword = htmlentities(preg_replace('/\s/','',Yii::$app->request->get('keyword')));
 
-        $result = GoodsSearch::find()->query([
+        $totalCount = GoodsSearch::find()->query([
+            "multi_match"=>[
+                "query"=>$keyword,
+                "fields"=>['goods_name','goods_desc']
+            ]
+        ])->all();
+        $totalCount = count($totalCount);
+
+        $pageSize = Yii::$app->params['pageSize']['goods'];
+        $pager = new Pagination(['totalCount'=>$totalCount,'pageSize'=>$pageSize]);
+        $goodsList = GoodsSearch::find()->query([
             "multi_match"=>[
                 "query"=>$keyword,
                 "fields"=>['goods_name','goods_desc']
@@ -61,11 +72,18 @@ class GoodsController extends CommonController{
             "pre_tags"=>["<strong style='color: red'>"],
             "post_tags"=>["</strong>"],
             "fields"=>["goods_name"=>new \stdClass(),"goods_desc"=>new \stdClass()]
-        ])->all();
+        ])->offset($pager->offset)->limit($pager->pageSize)->all();
 
-        echo "<pre>";
-        print_r($result);
-        echo "</pre>";
-
+        foreach ($goodsList as $k=>$v){
+            if(is_array($v->highlight)){
+                if(!empty($v->highlight['goods_name'])){
+                    $goodsList[$k]['goods_name'] = $v->highlight['goods_name'][0];
+                }
+                if(!empty($v->highlight['goods_desc'])){
+                    $goodsList[$k]['goods_desc'] = $v->highlight['goods_desc'][0];
+                }
+            }
+        }
+        return $this->render('searchList',compact('goodsList','pager','totalCount'));
     }
 }
