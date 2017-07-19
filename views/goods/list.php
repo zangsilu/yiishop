@@ -4,137 +4,11 @@
 
             <!-- ========================================= SIDEBAR ========================================= -->
             <div class="col-xs-12 col-sm-3 no-margin sidebar narrow">
-
-                <!-- ========================================= PRODUCT FILTER ========================================= -->
                 <div class="widget">
-                    <h1>商品筛选</h1>
-                    <div class="body bordered">
-
-                        <div class="category-filter">
-                            <h2>品牌</h2>
-                            <hr>
-                            <ul>
-                                <li><input checked="checked" class="le-checkbox" type="checkbox"  /> <label>Samsung</label> <span class="pull-right">(2)</span></li>
-                                <li><input  class="le-checkbox" type="checkbox" /> <label>Dell</label> <span class="pull-right">(8)</span></li>
-                                <li><input  class="le-checkbox" type="checkbox" /> <label>Toshiba</label> <span class="pull-right">(1)</span></li>
-                                <li><input  class="le-checkbox" type="checkbox" /> <label>Apple</label> <span class="pull-right">(5)</span></li>
-                            </ul>
-                        </div><!-- /.category-filter -->
-
-                        <div class="price-filter">
-                            <h2>价格</h2>
-                            <hr>
-                            <div class="price-range-holder">
-
-                                <input type="text" class="price-slider" value="" >
-
-                <span class="min-max">
-                    Price: ￥89 - ￥2899
-                </span>
-                <span class="filter-button">
-                    <a href="#">筛选</a>
-                </span>
-                            </div>
-                        </div><!-- /.price-filter -->
-
-                    </div><!-- /.body -->
-                </div><!-- /.widget -->
-                <!-- ========================================= PRODUCT FILTER : END ========================================= -->
-                <div class="widget">
-                    <h1 class="border">特价商品</h1>
-                    <ul class="product-list">
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 no-margin">
-                                    <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-01.jpg" />
-                                    </a>
-                                </div>
-                                <div class="col-xs-8 col-sm-8 no-margin">
-                                    <a href="#">Netbook Acer </a>
-                                    <div class="price">
-                                        <div class="price-prev">￥2000</div>
-                                        <div class="price-current">￥1873</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 no-margin">
-                                    <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-02.jpg" />
-                                    </a>
-                                </div>
-                                <div class="col-xs-8 col-sm-8 no-margin">
-                                    <a href="#">PowerShot Elph 115 16MP Digital Camera</a>
-                                    <div class="price">
-                                        <div class="price-prev">￥2000</div>
-                                        <div class="price-current">￥1873</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 no-margin">
-                                    <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-03.jpg" />
-                                    </a>
-                                </div>
-                                <div class="col-xs-8 col-sm-8 no-margin">
-                                    <a href="#">PowerShot Elph 115 16MP Digital Camera</a>
-                                    <div class="price">
-                                        <div class="price-prev">￥2000</div>
-                                        <div class="price-current">￥1873</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 no-margin">
-                                    <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-01.jpg" />
-                                    </a>
-                                </div>
-                                <div class="col-xs-8 col-sm-8 no-margin">
-                                    <a href="#">Netbook Acer</a>
-                                    <div class="price">
-                                        <div class="price-prev">￥2000</div>
-                                        <div class="price-current">￥1873</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 no-margin">
-                                    <a href="#" class="thumb-holder">
-                                        <img alt="" src="/assets/images/blank.gif" data-echo="/home/images/products/product-small-02.jpg" />
-                                    </a>
-                                </div>
-                                <div class="col-xs-8 col-sm-8 no-margin">
-                                    <a href="#">PowerShot Elph 115 16MP Digital Camera</a>
-                                    <div class="price">
-                                        <div class="price-prev">￥2000</div>
-                                        <div class="price-current">￥1873</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div><!-- /.widget -->
-                <!-- ========================================= FEATURED PRODUCTS ========================================= -->
-                <div class="widget">
-                    <h1 class="border">推荐商品</h1>
+                    <h1 class="border">热卖商品</h1>
                     <ul class="product-list">
 
-                        <?php foreach($this->params['tui'] as $k=>$v): ?>
+                        <?php foreach($this->params['hot'] as $k=>$v): ?>
                         <li class="sidebar-product-list-item">
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4 no-margin">
@@ -243,7 +117,7 @@
                                             <div class="product-item">
                                                 <div class="ribbon red"><span>sale</span></div>
                                                 <div class="image">
-                                                    <a href="<?= \yii\helpers\Url::to(['goods/details','goods_id'=>$v->id]) ?>">
+                                                    <a href="<?=  \yii\helpers\Url::to(['goods/details','goods_id'=>$v->id]) ?>">
                                                     <img alt="" src="<?= 'http://'.$v->goods_img ?>" data-echo="<?= 'http://'.$v->goods_img ?>" />
                                                 </a>
                                                 </div>
@@ -275,17 +149,17 @@
 
                                         <div class="col-xs-12 col-sm-6 text-left">
                                             <ul class="pagination ">
-                                                <li class="current"><a  href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">next</a></li>
+                                                <?php echo yii\widgets\LinkPager::widget([
+                                                    'pagination' => $pager,
+                                                    'prevPageLabel' => '&#8249;',
+                                                    'nextPageLabel' => '&#8250;',
+                                                ]); ?>
                                             </ul>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-6">
                                             <div class="result-counter">
-                                                Showing <span>1-9</span> of <span>11</span> results
+                                                <span><?= $totalCount ?></span> results
                                             </div>
                                         </div>
 

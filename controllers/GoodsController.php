@@ -27,9 +27,13 @@ class GoodsController extends CommonController{
         $cids = $category->getSubIds($cid);
 
         //取出商品
-        $goodsInfo = Goods::find()->where(['ison'=>1,'cid'=>$cids])->orderBy(['created_at'=>'desc'])->all();
+        $goodsInfo = Goods::find()->where(['ison'=>1,'cid'=>$cids]);
+        $totalCount = $goodsInfo->count();
+        $pageSize = Yii::$app->params['pageSize']['goods'];
+        $pager = new Pagination(['totalCount'=>$totalCount,'pageSize'=>$pageSize]);
+        $goodsInfo = $goodsInfo->offset($pager->offset)->limit($pager->limit)->orderBy(['created_at'=>'desc'])->all();
 
-        return $this->render('list',compact('goodsInfo'));
+        return $this->render('list',compact('goodsInfo','pager','totalCount'));
 
     }
 

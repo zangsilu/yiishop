@@ -112,7 +112,7 @@ AppAsset::register($this);
                     ])
                     ?>
                         <div class="control-group">
-                            <input class="search-field" placeholder="搜索商品" name="keyword"/>
+                            <input value="<?= Yii::$app->request->get('keyword',''); ?>" class="search-field" placeholder="搜索商品" name="keyword"/>
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
@@ -301,226 +301,6 @@ AppAsset::register($this);
 
     <footer id="footer" class="color-bg">
 
-        <div class="container">
-            <div class="row no-margin widgets-row">
-                <div class="col-xs-12  col-sm-4 no-margin-left">
-                    <!-- ============================================================= FEATURED PRODUCTS ============================================================= -->
-                    <div class="widget">
-                        <h2>推荐商品</h2>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Netbook Acer Travel B113-E-10072</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-01.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-02.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-03.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div><!-- /.body -->
-                    </div> <!-- /.widget -->
-                    <!-- ============================================================= FEATURED PRODUCTS : END ============================================================= -->
-                </div><!-- /.col -->
-
-                <div class="col-xs-12 col-sm-4 ">
-                    <!-- ============================================================= ON SALE PRODUCTS ============================================================= -->
-                    <div class="widget">
-                        <h2>促销商品</h2>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">HP Scanner 2910P</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-04.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Galaxy Tab 3 GT-P5210 16GB, Wi-Fi, 10.1in -
-                                                White</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-05.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-06.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div><!-- /.body -->
-                    </div> <!-- /.widget -->
-                    <!-- ============================================================= ON SALE PRODUCTS : END ============================================================= -->
-                </div><!-- /.col -->
-
-                <div class="col-xs-12 col-sm-4 ">
-                    <!-- ============================================================= TOP RATED PRODUCTS ============================================================= -->
-                    <div class="widget">
-                        <h2>最热商品</h2>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Galaxy Tab GT-P5210, 10" 16GB Wi-Fi</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-07.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">PowerShot Elph 115 16MP Digital Camera</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-08.jpg"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-9 no-margin">
-                                            <a href="single-product.html">Surface RT 64GB, Wi-Fi, 10.6in - Dark
-                                                Titanium</a>
-                                            <div class="price">
-                                                <div class="price-prev">￥2000</div>
-                                                <div class="price-current">￥1873</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-3 no-margin">
-                                            <a href="#" class="thumb-holder">
-                                                <img alt=""
-                                                     src="/home/images/blank.gif"
-                                                     data-echo="<?php echo \yii\helpers\Url::home(true) ?>assets/images/products/product-small-09.jpg"/>
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                </li>
-                            </ul>
-                        </div><!-- /.body -->
-                    </div><!-- /.widget -->
-                    <!-- ============================================================= TOP RATED PRODUCTS : END ============================================================= -->
-                </div><!-- /.col -->
-
-            </div><!-- /.widgets-row-->
-        </div><!-- /.container -->
-
         <div class="sub-form-row">
             <!--<div class="container">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 no-padding">
@@ -534,9 +314,9 @@ AppAsset::register($this);
 
         <div class="link-list-row">
             <div class="container no-padding">
-                <div class="col-xs-12 col-md-4 ">
+                <div class="col-xs-12 col-md-12">
                     <!-- ============================================================= CONTACT INFO ============================================================= -->
-                    <div class="contact-info">
+                    <div style="width: 300px;margin: 0 auto;" class="contact-info">
                         <div class="footer-logo">
                             <img alt="logo" src="/home/images/logo.PNG"
                                  width="233" height="54"/>
@@ -566,58 +346,6 @@ AppAsset::register($this);
                     <!-- ============================================================= CONTACT INFO : END ============================================================= -->
                 </div>
 
-                <div class="col-xs-12 col-md-8 no-margin">
-                    <!-- ============================================================= LINKS FOOTER ============================================================= -->
-                    <div class="link-widget">
-                        <div class="widget">
-                            <h3>快速检索</h3>
-                            <ul>
-                                <li><a href="category-grid.html">laptops &amp; computers</a></li>
-                                <li><a href="category-grid.html">Cameras &amp; Photography</a></li>
-                                <li><a href="category-grid.html">Smart Phones &amp; Tablets</a></li>
-                                <li><a href="category-grid.html">Video Games &amp; Consoles</a></li>
-                                <li><a href="category-grid.html">TV &amp; Audio</a></li>
-                                <li><a href="category-grid.html">Gadgets</a></li>
-                                <li><a href="category-grid.html">Car Electronic &amp; GPS</a></li>
-                                <li><a href="category-grid.html">Accesories</a></li>
-                            </ul>
-                        </div><!-- /.widget -->
-                    </div><!-- /.link-widget -->
-
-                    <div class="link-widget">
-                        <div class="widget">
-                            <h3>热门商品</h3>
-                            <ul>
-                                <li><a href="category-grid.html">Find a Store</a></li>
-                                <li><a href="category-grid.html">About Us</a></li>
-                                <li><a href="category-grid.html">Contact Us</a></li>
-                                <li><a href="category-grid.html">Weekly Deals</a></li>
-                                <li><a href="category-grid.html">Gift Cards</a></li>
-                                <li><a href="category-grid.html">Recycling Program</a></li>
-                                <li><a href="category-grid.html">Community</a></li>
-                                <li><a href="category-grid.html">Careers</a></li>
-
-                            </ul>
-                        </div><!-- /.widget -->
-                    </div><!-- /.link-widget -->
-
-                    <div class="link-widget">
-                        <div class="widget">
-                            <h3>最近浏览</h3>
-                            <ul>
-                                <li><a href="category-grid.html">My Account</a></li>
-                                <li><a href="category-grid.html">Order Tracking</a></li>
-                                <li><a href="category-grid.html">Wish List</a></li>
-                                <li><a href="category-grid.html">Customer Service</a></li>
-                                <li><a href="category-grid.html">Returns / Exchange</a></li>
-                                <li><a href="category-grid.html">FAQs</a></li>
-                                <li><a href="category-grid.html">Product Support</a></li>
-                                <li><a href="category-grid.html">Extended Service Plans</a></li>
-                            </ul>
-                        </div><!-- /.widget -->
-                    </div><!-- /.link-widget -->
-                    <!-- ============================================================= LINKS FOOTER : END ============================================================= -->
-                </div>
             </div><!-- /.container -->
         </div><!-- /.link-list-row -->
 
@@ -625,7 +353,7 @@ AppAsset::register($this);
             <div class="container">
                 <div class="col-xs-12 col-sm-6 no-margin">
                     <div class="copyright">
-                        &copy; <a href="index.html">Imooc.com</a> - all rights reserved
+                        &copy; <a href="index.html">Mgyii.pl39.com</a> - all rights reserved
                     </div><!-- /.copyright -->
                 </div>
                 <div class="col-xs-12 col-sm-6 no-margin">

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\elasticSearch\ESSynchr;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -34,6 +35,9 @@ class Goods extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            'ESSynchr' => [
+                'class' => ESSynchr::class,
+            ],
         ];
     }
 

@@ -130,12 +130,15 @@ class Admin extends ActiveRecord implements IdentityInterface {
             /**
              * 使用admin用户组件实现登入
              */
-            $result = Yii::$app->admin->login($this->getAdmin(),$this->rememberMe ? 24*3600*7 : 0);
-            if($result){
-                //更新登入时间与登入ip
-                self::updateAll(['admin_login_time'=>time(),'admin_login_ip'=>ip2long(Yii::$app->request->userIP)],'admin_user=:user',[':user' =>$this->admin_user]);
-                //返回bool
-                return true;
+            $adminObj = $this->getAdmin();
+            if(!empty($adminObj)){
+                $result = Yii::$app->admin->login($adminObj,$this->rememberMe ? 24*3600*7 : 0);
+                if($result){
+                    //更新登入时间与登入ip
+                    self::updateAll(['admin_login_time'=>time(),'admin_login_ip'=>ip2long(Yii::$app->request->userIP)],'admin_user=:user',[':user' =>$this->admin_user]);
+                    //返回bool
+                    return true;
+                }
             }
             $this->addError('admin_pass','用户名或密码错误!');
         }
