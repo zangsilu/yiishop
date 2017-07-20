@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a53760322a699ec7c431222bde4350e7",
-    "content-hash": "42dab224b3a7ba860da1fcd8052649c2",
+    "hash": "0e2bcc87958f54da714f9e73ddaf2362",
+    "content-hash": "98226825e0b5a75b73e0a97383b365a8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -807,6 +807,54 @@
                 "yii2"
             ],
             "time": "2016-03-17 04:45:15"
+        },
+        {
+            "name": "yiisoft/yii2-redis",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-redis.git",
+                "reference": "5dc55d5187923219e9db86d149d56acf1f5a6ee8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-redis/5dc55d5187923219e9db86d149d56acf1f5a6ee8.zip",
+                "reference": "5dc55d5187923219e9db86d149d56acf1f5a6ee8",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.11"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\redis\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc"
+                }
+            ],
+            "description": "Redis Cache, Session and ActiveRecord for the Yii framework",
+            "keywords": [
+                "active-record",
+                "cache",
+                "redis",
+                "session",
+                "yii2"
+            ],
+            "time": "2017-04-05 13:42:11"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

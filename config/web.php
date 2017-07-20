@@ -53,7 +53,12 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '192.168.2.200',
+            'port' => 6379,
+            'database' => 0,
+        ],
         /* 邮件发送设置 */
         'mailer'       => [
             'class'            => 'yii\swiftmailer\Mailer',
