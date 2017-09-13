@@ -120,7 +120,7 @@ class OrderController extends CommonController
 
             foreach (Yii::$app->params['express'] as $m => $n) {
                 if (in_array($v['express'], $n)) {
-                    $orderList[$k]['express_price'] = $n[1] ?? 0;
+                    $orderList[$k]['express_price'] = empty($n[1]) ? 0 : $n[1];
                 }else{
                     $orderList[$k]['express_price'] = 0;
                 }

@@ -14,7 +14,8 @@ $this->title = '首页 - ';
                         <ul class="nav">
 
 
-                            <?php  foreach ($this->params['menu'] as $k =>$v): ?>
+                            <?php
+                            foreach ($this->params['menu'] as $k =>$v): ?>
                             <li class="dropdown menu-item">
                                 <a href="<?= \yii\helpers\Url::to(['goods/list?cid='.$v['id']]) ?>" class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
                                 <ul class="dropdown-menu mega-menu">

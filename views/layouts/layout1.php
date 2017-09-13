@@ -114,25 +114,6 @@ AppAsset::register($this);
                         <div class="control-group">
                             <input value="<?= Yii::$app->request->get('keyword',''); ?>" class="search-field" placeholder="搜索商品" name="keyword"/>
 
-                            <ul class="categories-filter animate-dropdown">
-                                <li class="dropdown">
-
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="category-grid.html">所有分类</a>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">电子产品</a></li>
-
-                                    </ul>
-                                </li>
-                            </ul>
-
                             <a style="padding:15px 15px 13px 12px" class="search-button" href="javascript:document.getElementById('w3').submit();"></a>
 
                         </div>
@@ -151,20 +132,6 @@ AppAsset::register($this);
 
                         <div class="basket">
 
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <div class="basket-item-count">
-                                    <span class="count">3</span>
-                                    <img src="/home/images/icon-cart.png"
-                                         alt=""/>
-                                </div>
-
-                                <div class="total-price-basket">
-                                    <span class="lbl">您的购物车:</span>
-                                    <span class="total-price">
-                        <span class="sign">￥</span><span class="value">3219</span>
-                    </span>
-                                </div>
-                            </a>
 
                             <ul class="dropdown-menu">
                                 <li>
@@ -268,7 +235,7 @@ AppAsset::register($this);
 
                             <?php foreach ($this->params['menu'] as $k => $v): ?>
                                 <li class="dropdown">
-                                    <a href="<?= \yii\helpers\Url::to(['goods/list?cid=' . $v['id']]) ?>"
+                                    <a href="<?= \yii\helpers\Url::to(['goods/list','cid'=>$v['id']]) ?>"
                                        class="dropdown-toggle" data-hover="dropdown"><?= $v['title'] ?></a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -276,7 +243,7 @@ AppAsset::register($this);
                                                 <div class="row">
                                                     <div>
                                                         <?php foreach ($v['child'] as $m => $n): ?>
-                                                            <a href="<?= \yii\helpers\Url::to(['goods/list?cid=' . $n['id']]) ?>">
+                                                            <a href="<?= \yii\helpers\Url::to(['goods/list','cid'=>$n['id']]) ?>">
                                                                 <h2 style="padding-right: 10px;text-align: center"><?= $n['title'] ?></h2>
                                                             </a>
                                                         <?php endforeach; ?>

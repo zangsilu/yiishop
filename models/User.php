@@ -13,6 +13,7 @@ use Faker\Factory;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use zangsilu\mailerqueue\MailerQueue;
 
 /**
  * Class User
@@ -120,7 +121,7 @@ class User extends ActiveRecord implements IdentityInterface
             $mail->setFrom(Yii::$app->params['defaultValue']['admin_email']);
             $mail->setTo($this->useremail);
             $mail->setSubject('木瓜商城-账号注册');
-            if ($mail->send() && $this->addUser($data)) {
+            if ($mail->queue() && $this->addUser($data)) {
                 return true;
             }
         }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e2bcc87958f54da714f9e73ddaf2362",
-    "content-hash": "98226825e0b5a75b73e0a97383b365a8",
+    "hash": "7f39b2a6e8d1588e33c0c29c1a9ca67d",
+    "content-hash": "a9d71daaedfa93f9a8bfbed3618588d5",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -204,6 +204,39 @@
                     "Gruntfile.js",
                     "node_modules",
                     "package.json"
+                ]
+            }
+        },
+        {
+            "name": "bower-asset/raven-js",
+            "version": "3.12.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/raven-js.git",
+                "reference": "e677410a8f1332b14711b7f7a302ebda9d844621"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsentry/raven-js/zipball/e677410a8f1332b14711b7f7a302ebda9d844621",
+                "reference": "e677410a8f1332b14711b7f7a302ebda9d844621",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/raven.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "AUTHORS",
+                    "CHANGELOG.md",
+                    "CONTRIBUTING.md",
+                    "Gruntfile.js",
+                    "Makefile",
+                    "README.md",
+                    "docs",
+                    "package.json",
+                    "example",
+                    "test",
+                    "dist/sri.json"
                 ]
             }
         },
@@ -460,6 +493,125 @@
             ],
             "description": "desc",
             "time": "2015-02-06 02:01:30"
+        },
+        {
+            "name": "mito/yii2-sentry",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hellowearemito/yii2-sentry.git",
+                "reference": "a0676f0f99fc5fbac1b69752eb67e33730a8dc31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/hellowearemito/yii2-sentry/a0676f0f99fc5fbac1b69752eb67e33730a8dc31.zip",
+                "reference": "a0676f0f99fc5fbac1b69752eb67e33730a8dc31",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/raven-js": "3.12.*",
+                "sentry/sentry": "1.6.*",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "codeception/codeception": "2.1.*",
+                "codeception/mockery-module": "^0.2.2",
+                "codeception/specify": " *",
+                "codeception/verify": " *",
+                "mito/yii2-coding-standards": "~2.0.0@beta",
+                "satooshi/php-coveralls": "~1.0",
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mito\\sentry\\": "src/",
+                    "mito\\sentry\\tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Albert Borsos",
+                    "email": "a.borsos@mito.hu"
+                }
+            ],
+            "description": "Yii 2 extension for Sentry",
+            "keywords": [
+                "extension",
+                "sentry",
+                "yii2"
+            ],
+            "time": "2017-03-30 15:37:10"
+        },
+        {
+            "name": "sentry/sentry",
+            "version": "1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/sentry-php.git",
+                "reference": "5bee26136ab3fc166334cd972892bf71bd361558"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/getsentry/sentry-php/5bee26136ab3fc166334cd972892bf71bd361558.zip",
+                "reference": "5bee26136ab3fc166334cd972892bf71bd361558",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2.4"
+            },
+            "conflict": {
+                "raven/raven": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.8.0",
+                "monolog/monolog": "*",
+                "phpunit/phpunit": "^4.8 || ^5.0"
+            },
+            "suggest": {
+                "monolog/monolog": "Automatically capture Monolog events as breadcrumbs"
+            },
+            "bin": [
+                "bin/sentry"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Raven_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Cramer",
+                    "email": "dcramer@gmail.com"
+                }
+            ],
+            "description": "A PHP client for Sentry (http://getsentry.com)",
+            "homepage": "http://getsentry.com",
+            "keywords": [
+                "log",
+                "logging"
+            ],
+            "time": "2017-02-03 07:32:53"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -905,6 +1057,49 @@
                 "yii2"
             ],
             "time": "2016-09-09 11:48:11"
+        },
+        {
+            "name": "zangsilu/yii2-mailer-queue",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zangsilu/yii2-mailer-queue.git",
+                "reference": "867d2ba89c46e2e3cc6cd59989615c0b33e71e84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/zangsilu/yii2-mailer-queue/867d2ba89c46e2e3cc6cd59989615c0b33e71e84.zip",
+                "reference": "867d2ba89c46e2e3cc6cd59989615c0b33e71e84",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-redis": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "zangsilu\\mailerqueue\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zangsilu",
+                    "email": "532817108@qq.com"
+                }
+            ],
+            "description": "使用队列异步发送邮件.",
+            "keywords": [
+                "async",
+                "mailer",
+                "redis",
+                "yii2"
+            ],
+            "time": "2017-09-10 04:30:03"
         }
     ],
     "packages-dev": [

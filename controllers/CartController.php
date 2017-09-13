@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\models\Cart;
 use app\models\Goods;
 use Yii;
+use yii\caching\DbDependency;
 use yii\filters\AccessControl;
 
 
@@ -53,11 +54,26 @@ class CartController extends CommonController
     public function actionIndex()
     {
 
+        /**
+         * 判断redis缓存中是否存在
+         */
+        $cache = Yii::$app->cache;
+        $cartInfo = $cache->get('cartInfo');
+        if(empty($cartInfo)){
         $userId = Yii::$app->user->id;
         $cartInfo = Cart::find()->alias('c')
             ->select('g.*,c.*,c.id cart_id,c.goods_num cart_goods_num')
             ->leftJoin(Goods::tableName() . ' g', 'c.goods_id = g.id')
             ->where(['c.username' => $userId])->asArray()->all();
+
+            /**
+             * 建立更新缓存的依赖规则,如果有更新则自动更新数据
+             */
+            $dep = new DbDependency([
+                'sql' => "SELECT MAX(updated_at) FROM {{%cart}} WHERE username = $userId"
+            ]);
+        $cache->set('cartInfo',$cartInfo,60,$dep);
+        }
 
         //总价
         $total = 0;
