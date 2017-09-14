@@ -17,7 +17,6 @@ class IndexController extends CommonController{
 
     /* 前台首页 */
     public function actionIndex(){
-        \Yii::error('我是追踪记录日志.');
         return $this->render('index');
     }
 

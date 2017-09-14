@@ -107,7 +107,8 @@ $config = [
         ],
         'sentry' => [
             'class' => 'mito\sentry\Component',
-            'dsn' => 'YOUR-PRIVATE-DSN', // private DSN
+            'dsn' => 'https://905d60a0073a4851855cc7ecefd3d778:d6b3a82903b641d18c07d9902f713bb8@sentry.io/216254', // private DSN
+            'publicDsn' => 'https://905d60a0073a4851855cc7ecefd3d778@sentry.io/216254',
             'environment' => 'staging', // if not set, the default is `production`
             'jsNotifier' => true, // to collect JS errors. Default value is `false`
             'jsOptions' => [ // raven-js config parameter
@@ -139,7 +140,7 @@ $config = [
                     'categories' => ['myinfo'],
                     'logVars' => [],
                 ],
-                [
+                /*[
                  'class' => 'yii\log\EmailTarget',
                  'mailer' =>'mailer',
                  'levels' => ['error', 'warning'],
@@ -148,7 +149,7 @@ $config = [
                      'to' => ['532817108@qq.com'],
                      'subject' => 'yii_shop的日志',
                  ],
-                ],
+                ],*/
             ],
         ],
         'db'            => require(__DIR__ . '/db.php'),
